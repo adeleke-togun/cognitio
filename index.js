@@ -15,7 +15,6 @@ function run(appdir, rootRef) {
   app.use(cookieParser());
 
   app.dir = appdir;
-  console.log appdir
 
   // things to do on each request
   app.use(function (req, res, next) {
