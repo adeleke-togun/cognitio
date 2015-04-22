@@ -41,6 +41,10 @@ function run(appdir, rootRef) {
     extended: true
   }));
 
+  app.get('/*', function(req, res) {
+    res.sendFile('index.html', {root: './public'});
+  });
+  
   routes(app, config, rootRef);
 
   // Fire up server
