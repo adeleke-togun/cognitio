@@ -28,7 +28,7 @@ function run(appdir, rootRef) {
   });
 
   // static files
-  app.use(express.static(app.dir + '/public'));
+  app.use(express.static(process.env.PWD + '/public'));
 
   // Standard error handling
   app.use(function(err, req, res, next){
