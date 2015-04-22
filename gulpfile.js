@@ -49,12 +49,12 @@ gulp.task('static-files',function(){
 });
 
 gulp.task('lint', function () {
-  gulp.src(['./app/**/*.js','./server.js','./lib/**/*.js','./config/**/*.js']).pipe(jshint())
+  gulp.src(['./app/**/*.js','./index.js','./lib/**/*.js','./config/**/*.js']).pipe(jshint())
   .pipe(jshint.reporter('default'));
 });
 
 gulp.task('nodemon', function () {
-  nodemon({ script: 'server.js', ext: 'js', ignore: ['public/**','app/**','node_modules/**'] })
+  nodemon({ script: 'index.js', ext: 'js', ignore: ['public/**','app/**','node_modules/**'] })
     .on('restart',['jade','less'], function () {
       console.log('>> node restart');
     });
