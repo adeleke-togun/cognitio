@@ -1,7 +1,7 @@
 angular.module('cognitio.controllers')
 .controller('HomeCtrl',
-  ['$scope', '$state', '$mdBottomSheet', 'Authentication',
-    function($scope, $state, $mdBottomSheet, Authentication) {
+  ['$scope', '$state', '$mdBottomSheet', 'Authentication','Refs',
+    function($scope, $state, $mdBottomSheet, Authentication, Refs) {
 
       $scope.showMenu = function($event) {
         $mdBottomSheet.show({
