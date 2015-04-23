@@ -1,6 +1,6 @@
 angular.module('cognitio.services')
-  .factory('Authentication', ['$cookies', '$firebase', '$rootScope','$state', 'Refs', 'Toast',
-    function($cookies, $firebase, $rootScope, $state, Refs, Toast) {
+  .factory('Authentication', ['$cookies', '$firebase', '$rootScope','$state', 'Refs',
+    function($cookies, $firebase, $rootScope, $state, Refs) {
       return {
         login: function(cb) {
           var options = { remember: true, scope: "email" };
