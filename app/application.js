@@ -9,11 +9,15 @@ require('./js/services/authentication.js');
 require('./js/services/refs.js');
 require('./js/services/toast.js');
 require('./js/services/users.js');
+require('./js/services/authorization.js');
+
 
 /* load filters */
 require('./js/filters/reverse.js');
 
 /* load directives */
+require('./js/directives/authorization.js');
+
 
 /* load controllers */
 require('./js/controllers/home.js');
@@ -31,13 +35,14 @@ window.Cognitio = angular.module("Cognitio", [
   'ngMaterial'
 ]);
 
-Cognitio.run(['$rootScope', '$state', 'Authentication', 'Refs', 'Toast',
-  function($rootScope, $state, Authentication, Refs, Toast) {
+Cognitio.run(['$rootScope', '$state', 'Authentication', 'Refs', 'Toast','Authorization',
+  function($rootScope, $state, Authentication, Refs, Toast, Authorization) {
   $rootScope._ = window._;
   $rootScope.moment = window.moment;
   $rootScope.authCallback = function(authData) {
     Authentication.auth(authData, function(user) {
       if(user) {
+        //you can redirect a user here to the admin page by checking the serivice
         Toast('Welcome, ' + user.name + '!');
       }
       else {
