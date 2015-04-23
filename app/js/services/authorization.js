@@ -7,13 +7,13 @@ angular.module('cognitio.services').factory('Authorization', ['$q', 'Refs', func
     var adminRef;
 
     if(authData.google) { 
-      
       var googleUid = 'google:'+ authData.google.id;
-      adminRef = Refs.root.child('admin').child('google:111952894305964447539'); // use google uid or mail instead
+      adminRef = Refs.root.child('admin').child(googleUid); // use google uid or mail instead
       
     } 
 
     adminRef.on('value', function(adminSnap) {
+      console.log(adminSnap.val());
       deferred.resolve(adminSnap.val());
     });
     return deferred.promise;
