@@ -1,8 +1,8 @@
 var development = {
   firebase: {
-    rootRefUrl: "https://cognitio.firebaseio.com/",
+    rootRefUrl: "https://cognitio-dev.firebaseio.com/",
     serverUID: "cognitio",
-    secretKey: "SYkMRRQcfLBCRutRukBYt0IOmMvjrTbSkVikghih"
+    secretKey: "x7tkv4j3DklFxdmNUkbtkZfpMSTiwJWGBczyaDid"
   }
 };
 
@@ -28,3 +28,4 @@ var config = {
   production: production,
 };
 module.exports = config;
+
