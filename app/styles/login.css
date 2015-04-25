@@ -1,0 +1,64 @@
+#landing .section {
+  z-index: 1;
+  min-height: 420px;
+  width: 100%;
+  overflow: auto;
+  height: 100%;
+  padding-top: 100px;
+  padding-bottom: 50px;
+  top: 0;
+}
+
+@media (min-width: 768px) {
+  #landing .section {
+    padding-top: 100px;
+  }
+}
+
+.container {
+  overflow: visible;
+  height: 100%;
+}
+
+section.main-page-container {
+  padding-top: 300px;
+  width: 100%;
+  text-align: center;
+}
+
+#landing div.box {
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 60px 10px 80px 10px;
+}
+
+@media (max-width: 768px) {
+  #landing .section {
+    padding-top: 160px;
+  }
+}
+h1#brand-name {
+  border: 0;
+  font: 0/0 a;
+  text-shadow: none;
+  color: transparent;
+  background: url(/img/main-brand.png) no-repeat;
+  background-size: cover;
+  width: 400px;
+  height: 140px;
+  margin: 0 auto;
+}
+
+#landing p.italic {
+  margin-top: -20px;
+  font-style: italic;
+}
+#landing .login {
+  margin: 80px 0 0;
+}
+.login p a.btn {
+  width: 150px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  color: #fff;
+}
