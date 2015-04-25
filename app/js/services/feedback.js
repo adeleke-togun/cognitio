@@ -24,7 +24,7 @@ angular.module('cognitio.services')
 
         getFeedback: function(feedback_id) {
           return $firebase(Refs.feedbacks.child(feedback_id)).$asObject();
-        }
+        },
 
         deleteFeedback: function(feedback_id) {
           return Refs.feedbacks.child(feedback_id).remove();
