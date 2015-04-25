@@ -35,9 +35,7 @@ window.Cognitio = angular.module("Cognitio", [
   'cognitio.controllers',
   'cognitio.directives',
   'cognitio.filters',
-  'cognitio.services',
-  'ngAnimate',
-  'ngMaterial'
+  'cognitio.services'
 ]);
 
 Cognitio.run(['$rootScope', '$state', 'Authentication', 'Refs', 'Toast','Authorization',
