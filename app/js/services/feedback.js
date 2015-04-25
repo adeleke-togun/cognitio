@@ -1,6 +1,6 @@
 angular.module('cognitio.services')
-  .factory('Feedback', ['$firebase', '$rootScope', $cookies, 'Refs',
-    function($firebase, $rootScope, $cookies, Refs) {
+  .factory('Feedback', ['$firebase', '$rootScope', 'Refs',
+    function($firebase, $rootScope, Refs) {
       return {
         all: function() {
           return $firebase(Refs.feedbacks).$asArray();
