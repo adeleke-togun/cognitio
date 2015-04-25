@@ -5,8 +5,8 @@ angular.module('cognitio.directives')
       restrict: 'EA',
       controller: ['$scope', 'Authorization',
         function($scope, Authorization) {
-       console.log('got here into Authorization');
-        // checks to see if logged in user is an admin
+        console.log('got here into Authorization');
+        // checks to see if logged in user is an admin use is-authorized ng-show='showPage' on all admin pages
         Authorization.isAuthorized().then(function(admin) {
           if(!admin) {
             // window.location.pathname = '/login';

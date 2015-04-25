@@ -10,6 +10,8 @@ require('./js/services/refs.js');
 require('./js/services/toast.js');
 require('./js/services/users.js');
 require('./js/services/authorization.js');
+require('./js/services/assessment.js');
+
 
 
 /* load filters */
@@ -25,14 +27,15 @@ require('./js/controllers/login.js');
 require('./js/controllers/menu.js');
 require('./js/controllers/users.js');
 
+/* load services */
+require('./js/services/submission.js');
+
 window.Cognitio = angular.module("Cognitio", [
   'ui.router',
   'cognitio.controllers',
   'cognitio.directives',
   'cognitio.filters',
-  'cognitio.services',
-  'ngAnimate',
-  'ngMaterial'
+  'cognitio.services'
 ]);
 
 Cognitio.run(['$rootScope', '$state', 'Authentication', 'Refs', 'Toast','Authorization',
