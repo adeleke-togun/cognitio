@@ -11,8 +11,8 @@ require('./js/services/toast.js');
 require('./js/services/users.js');
 require('./js/services/authorization.js');
 require('./js/services/assessment.js');
-
-
+require('./js/services/submission.js');
+require('./js/services/feedback.js');
 
 /* load filters */
 require('./js/filters/reverse.js');
@@ -27,8 +27,6 @@ require('./js/controllers/login.js');
 require('./js/controllers/menu.js');
 require('./js/controllers/users.js');
 
-/* load services */
-require('./js/services/submission.js');
 
 window.Cognitio = angular.module("Cognitio", [
   'ui.router',
