@@ -25,6 +25,9 @@ require('./js/controllers/login.js');
 require('./js/controllers/menu.js');
 require('./js/controllers/users.js');
 
+/* load services */
+require('./js/services/submission.js');
+
 window.Cognitio = angular.module("Cognitio", [
   'ui.router',
   'cognitio.controllers',
