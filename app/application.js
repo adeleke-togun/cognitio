@@ -26,6 +26,7 @@ require('./js/controllers/home.js');
 require('./js/controllers/login.js');
 require('./js/controllers/menu.js');
 require('./js/controllers/users.js');
+require('./js/controllers/submit.js');
 
 /* load services */
 require('./js/services/submission.js');
@@ -89,5 +90,10 @@ Cognitio.config(['$stateProvider','$locationProvider',
       url: '/users/:userId',
       templateUrl: 'views/users.html',
       controller: 'UsersCtrl'
+    })
+    .state('users/id/submit', {
+      url: '/users/:userId/submit',
+      templateUrl: 'views/submit.html',
+      controller: 'SubmitCtrl'
     });
 }]);
