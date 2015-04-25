@@ -1,0 +1,24 @@
+section.container
+  h1 Current Info {{ hello }}
+  div#form-wrap
+    p.submit-head SUBMIT AN ASSIGNMENT
+    form(name="submit-assignment", action="", method="post")
+      
+      div.form-group
+        label(for="assessment:") Assessment:
+        div
+          select#assessment(ng-model="assessment")
+            option(value="new") Design Exercise 1
+            option(value="next") Create an iPhone image with Photoshop
+      
+      div.form-group
+        label(for="description:") Description:
+        div
+          input#description(type="textarea", name="description", placeholder="Enter a description of your assignment...")
+      
+      div.form-group
+        label(for="file-upload") File Upload:
+        div
+          input#file-upload(type="file", name="file-upload", accept=".zip,.png,.jpg,.psd")
+
+      input(type="Submit")
