@@ -8,7 +8,8 @@ angular.module('cognitio.services')
         root: rootRef,
         users: rootRef.child('users'),
         assessment: rootRef.child('assessments'),
-        submissions: rootRef.child('submissions')
+        submissions: rootRef.child('submissions'),
+        feedbacks: rootRef.child('feedbacks')
       };
     }
   ]);
