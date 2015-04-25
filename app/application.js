@@ -10,6 +10,8 @@ require('./js/services/refs.js');
 require('./js/services/toast.js');
 require('./js/services/users.js');
 require('./js/services/authorization.js');
+require('./js/services/assessment.js');
+
 
 
 /* load filters */
