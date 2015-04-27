@@ -1,0 +1,93 @@
+/* Assessment Submission Form */
+
+/* Fonts avaiable here from Google Fonts
+font-family: 'Tenor Sans', sans-serif;
+font-family: 'Port Lligat Sans', sans-serif;
+font-family: 'Alegreya Sans', sans-serif; */
+
+#form-wrap {
+	font-family: 'Alegreya Sans', sans-serif;
+	margin-top: 30px;
+	padding: 10px;
+	padding-bottom: 70px;
+	background-image: url('../img/form-bg.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-radius: .825em;
+}
+
+.submit-head {
+	background-color: #5C6B6D;
+	background-size: cover;
+	width: 250px;
+	margin: 10px;
+	padding: 5px;
+	text-align: center;
+	border-radius: .3125em;
+	font-size: 1.4em;
+}
+
+#submit-form {
+	font-size: 1.5em;
+	line-height: 2;
+}
+
+.form-top {
+	margin-top: 20px;
+}
+
+textarea#description,
+select#assessment,
+#file-upload {	
+	color: #fff;
+	background-color: transparent;
+	font-size: .9em;
+	border: 1px solid #fff;
+}
+
+textarea#description {
+	resize: vertical;
+}
+
+#file-upload {
+	height: 50px;
+	padding: 10px;
+}
+
+#file-upload span {
+	margin-right: 20px;
+}
+
+#file-upload input {
+	color: transparent;
+	display: inline-block;
+}
+
+.btn-submit,
+.btn-reset {
+	font-size: .975em;
+  padding: 15px 40px;
+	border: 1px solid #fff;
+	background-color: transparent;
+}
+
+.btn-submit {
+  margin-right: 40px;
+}
+
+.btn-submit:focus,
+.btn-submit:active,
+.btn-reset:focus,
+.btn-reset:active {
+	outline: 0;
+	color: #fff;
+}
+
+.btn-submit:hover,
+.btn-reset:hover,
+textarea#description:hover,
+select#assessment:hover,
+#file-upload:hover {
+	border-color: #ccc;
+	color: #fff
+}

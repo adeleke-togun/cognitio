@@ -1,4 +1,7 @@
 angular.module('cognitio.controllers')
-.controller('SubmitCtrl', ['$scope', function ($scope) {
-  $scope.hello = 'This is the page to submit assignments';
-  }]);
+.controller('SubmitCtrl', ['$scope', 'Assessment', function ($scope, Assessment) {
+
+  $scope.assessments = Assessment.all();
+
+  console.log($scope.assessments);
+}]);
