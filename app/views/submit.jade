@@ -1,24 +1,33 @@
 section.container
-  h1 Current Info {{ hello }}
   div#form-wrap
     p.submit-head SUBMIT AN ASSIGNMENT
-    form(name="submit-assignment", action="", method="post")
+    form#submit-form(name="submitAssignment", ng-submit="send()")
       
+      div.form-group.form-top
+        label.col-md-3.control-label(for="assessment") Assessment:
+        div.col-md-6
+          select#assessment.form-control(ng-model="res.assessment", required)
+            option(value="", disabled, selected) Choose an assessment
+            option(ng-repeat="assess in assessments") {{ assess.topic }}
+      br
+      br
       div.form-group
-        label(for="assessment:") Assessment:
-        div
-          select#assessment(ng-model="assessment")
-            option(value="new") Design Exercise 1
-            option(value="next") Create an iPhone image with Photoshop
-      
+        label.col-md-3.control-label(for="description") Description:
+        div.col-md-6
+          textarea#description.form-control(name="description", rows="7", ng-model="res.description", placeholder="Enter a description of your assignment...", required)
+      br
+      br
+      br
+      br
+      br
       div.form-group
-        label(for="description:") Description:
-        div
-          input#description(type="textarea", name="description", placeholder="Enter a description of your assignment...")
-      
+        label.col-md-3.control-label(for="file-upload") File Upload:
+        div.col-md-6
+          label#file-upload.form-control <span>Browse your files...</span> <input type="file" name="file-upload" accept=".zip,.png,.jpg,.psd" ng-model="res.fileUploaded">
+      br
+      br
       div.form-group
-        label(for="file-upload") File Upload:
-        div
-          input#file-upload(type="file", name="file-upload", accept=".zip,.png,.jpg,.psd")
-
-      input(type="Submit")
+        div.col-md-offset-3.col-md-6
+          input.btn-submit.btn(type="Submit", value="SUBMIT", ng-disabled="submitAssignment.$invalid")
+          input.btn-reset.btn(type="Reset", value="RESET")
+      br
