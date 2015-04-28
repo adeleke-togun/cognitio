@@ -1,14 +1,13 @@
 angular.module('cognitio.controllers')
-.controller('SubmitCtrl', ['$scope', 'Assessment', function ($scope, Assessment) {
+.controller('SubmitCtrl', ['$scope', 'Assessment', 'Submission', '$location', 
+	function ($scope, Assessment, Submission, $location) {
 
+  //retrieve all assessments
   $scope.assessments = Assessment.all();
 
-  console.log($scope.assessments);
-
   //grab form data and submit assessments
-  $scope.send = function (res) {
-    var data = $scope.res;
-    console.log(data);
+  $scope.send = function (response) {
+    Submission.submit(response.assessment_id, response);
+    $location.path('/home');
   };
-
 }]);
