@@ -66,7 +66,8 @@ a {
 a:hover,
 a:active {
   color: #fff;
-  text-decoration: underline;
+  text-decoration: none;
+  color: rgb(23,24,25);
 }
 
 p {
@@ -84,6 +85,7 @@ h2 {
   width: 40%;
   margin: 10% auto;
 }
+
 h1#brand-name {
   border: 0;
   font: 0/0 a;
@@ -93,4 +95,12 @@ h1#brand-name {
   background-size: contain;
   width: 300px;
   height: 75px;
+}
+
+.group:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
 }

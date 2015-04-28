@@ -29,7 +29,7 @@ section.main-page-container {
 #landing div.box {
   border: 1px solid #fff;
   border-radius: 5px;
-  padding: 60px 10px 80px 10px;
+  padding: 40px 10px 50px 10px;
 }
 
 @media (max-width: 768px) {
@@ -62,4 +62,7 @@ h1#brand-name {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.7);
   color: #fff;
+}
+.login p a.btn:hover {
+  border: 1px solid rgba(24, 13, 13, 0.7);
 }
