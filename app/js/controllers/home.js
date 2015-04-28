@@ -3,8 +3,8 @@ angular.module('cognitio.controllers')
   ['$scope', '$state', 'Authentication',
     function($scope, $state, Authentication) {
 
-      $scope.showMenu = function($event) {
-
+      $scope.signOut = function() {
+        console.log("it came with the boiler plate");
       };
 
       $scope.logout = function() {
