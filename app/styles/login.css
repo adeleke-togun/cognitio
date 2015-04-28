@@ -64,5 +64,5 @@ h1#brand-name {
   color: #fff;
 }
 .login p a.btn:hover {
-  border: 1px solid rgba(24, 13, 13, 0.7);
+  border: 1px solid rgba(24, 13, 13, 0.5);
 }
