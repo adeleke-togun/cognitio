@@ -1,7 +1,23 @@
-md-content.md-default-theme.no-bg(layout="column" layout-fill)
-  md-toolbar#home-toolbar
-    .md-toolbar-tools
-      span.title Cognitio
-      span(flex layout="row" layout-align="end center" ng-if="currentUser")
-        md-button(ng-click="showMenu($event)" aria-label="Show Bottom Sheet")
-          i.fa.fa-ellipsis-v
+section#home.main(is-authorized="")
+  .container-fluid
+    .margin-top.row
+      .col-md-12.notifications Notifications: There are currently no notifications at this time
+    .menu.row
+      .submit.col-md-4.submitAssignment
+        .options.submit
+          .text-center.submitIcon
+            img(src="../img/feedback-100.png")
+          .text-center.submitClick
+            button.submitBtn.btn.btn-default.btn-lg.text-center Submit Assignment
+      .col-md-4
+        .options
+          .text-center.submitIcon
+            img(src="../img/questions-100.png")
+          .text-center.submitClick
+            button.submitBtn.btn.btn-default.btn-lg.text-center Need Help?
+      .view.col-md-4.viewAssignment
+        .options.view
+          .text-center.submitIcon
+            img(src="../img/report_card-100.png")
+          .text-center.submitClick
+            button.submitBtn.btn.btn-default.btn-lg.text-center View Assignments

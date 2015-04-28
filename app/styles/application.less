@@ -30,7 +30,7 @@ Times;
 
 html {
   background: #669288 url('/img/main-bg.jpg') no-repeat top left;
-  min-height: 100%;
+height: 100%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -44,9 +44,14 @@ body {
   font-weight: normal;
   color: #fff;
   background: transparent;
-  min-height: 100%;
+height: 100%;
   -webkit-font-smoothing: antialiased;
   -webkit-overflow-scrolling: touch;
+}
+
+div#wrapper {
+  min-height: 100%;
+  position: relative;
 }
 
 html,
@@ -54,6 +59,13 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+section.main, div.main {
+  margin-top: 60px !important;
+}
+.main-content {
+  padding-bottom:109px; /* Height of the footer element */
+}
+
 /********************************************************/
 /*                      Typography                      */
 /********************************************************/
@@ -66,7 +78,8 @@ a {
 a:hover,
 a:active {
   color: #fff;
-  text-decoration: underline;
+  text-decoration: none;
+  color: rgb(23, 24, 25);
 }
 
 p {
@@ -84,6 +97,7 @@ h2 {
   width: 40%;
   margin: 10% auto;
 }
+
 h1#brand-name {
   border: 0;
   font: 0/0 a;
@@ -93,4 +107,12 @@ h1#brand-name {
   background-size: contain;
   width: 300px;
   height: 75px;
+}
+
+.group:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
 }

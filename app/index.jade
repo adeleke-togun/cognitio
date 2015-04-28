@@ -4,4 +4,8 @@ html(lang="en" ng-app="Cognitio")
     title Cognitio
     include shared/head
   body(layout="row" layout-fill)
-    md-content.md-default-theme.no-bg(layout="row" layout-fill ui-view)
+    #wrapper
+      include shared/header
+      .main-content.no-bg(layout="row" layout-fill ui-view)
+      include shared/footer
+

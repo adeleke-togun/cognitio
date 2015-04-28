@@ -70,8 +70,10 @@ Cognitio.config(['$stateProvider','$locationProvider',
     })
     .state('logout', {
       url: '/logout',
-      controller: ['Authentication', function(Authentication) {
+      controller: ['Authentication', '$state', '$rootScope', function (Authentication, $state, $rootScope) {
         Authentication.logout();
+        $state.go('login');
+        $rootScope.showPage();
       }]
     })
     .state('default', {

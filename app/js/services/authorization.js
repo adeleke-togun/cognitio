@@ -2,15 +2,17 @@ angular.module('cognitio.services').factory('Authorization', ['$q', 'Refs', func
 
   function isAuthorized() {
     var deferred = $q.defer();
-    
+
     var authData = Refs.root.getAuth();
     var adminRef;
-
-    if(authData.google) { 
+    if (!authData) {
+      deferred.reject('Not logged in');
+      return deferred.promise;
+    }
+    if(authData && authData.google) {
       var googleUid = 'google:'+ authData.google.id;
       adminRef = Refs.root.child('admin').child(googleUid); // use google uid or mail instead
-      
-    } 
+    }
 
     adminRef.on('value', function(adminSnap) {
       console.log(adminSnap.val());
@@ -21,5 +23,5 @@ angular.module('cognitio.services').factory('Authorization', ['$q', 'Refs', func
 
   return {
     isAuthorized: isAuthorized
-  };                   
+  };
 }]);
