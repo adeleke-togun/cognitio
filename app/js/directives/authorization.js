@@ -3,9 +3,10 @@ angular.module('cognitio.directives')
   .directive('isAuthorized', function() {
     return {
       restrict: 'EA',
-      controller: ['$scope', 'Authorization', '$location',
-        function($scope, Authorization, $location) {
+      controller: ['$scope', 'Authorization', '$location', '$rootScope',
+        function($scope, Authorization, $location, $rootScope) {
         Authorization.isAuthorized().then(function(admin) {
+          $rootScope.showPage = true;
           if(!admin) {
             // window.location.pathname = '/login';
           }
@@ -13,6 +14,7 @@ angular.module('cognitio.directives')
             $scope.showPage = true;
           }
         }, function (err) {
+          $rootScope.showPage = false;
           $location.path('/');
         });
       }]
