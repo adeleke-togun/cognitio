@@ -5,6 +5,7 @@ html(lang="en" ng-app="Cognitio")
     link(rel='shortcut icon', href='cognitio_fav.ico', type='image/x-icon')
     include shared/head
   body(layout="row" layout-fill)
-    md-content.md-default-theme.no-bg(layout="row" layout-fill ui-view)
-    include shared/footer
+    #wrapper
+      .main-content.no-bg(layout="row" layout-fill ui-view)
+      include shared/footer
 
