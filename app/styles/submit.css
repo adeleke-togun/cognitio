@@ -49,13 +49,15 @@ textarea#description {
 	resize: vertical;
 }
 
-#file-upload {
-	height: 50px;
-	padding: 10px;
+#file-upload-label {
+	margin-top: 20px;
 }
 
-#file-upload span {
-	margin-right: 20px;
+#file-upload {
+	font-size: .8em;
+	height: 50px;
+	padding: 10px;
+	margin-top: 20px;
 }
 
 #file-upload input {
@@ -78,7 +80,9 @@ textarea#description {
 .btn-submit:focus,
 .btn-submit:active,
 .btn-reset:focus,
-.btn-reset:active {
+.btn-reset:active,
+#file-upload:focus,
+#file-upload:active {
 	outline: 0;
 	color: #fff;
 }

@@ -1,33 +1,33 @@
 section.container
   div#form-wrap
     p.submit-head SUBMIT AN ASSIGNMENT
-    form#submit-form(name="submitAssignment", ng-submit="send()")
+    form#submit-form(name="submitAssignment")
       
       div.form-group.form-top
         label.col-md-3.control-label(for="assessment") Assessment:
         div.col-md-6
-          select#assessment.form-control(ng-model="res.assessment", required)
+          select#assessment.form-control(ng-model="response.assessment_id", required)
             option(value="", disabled, selected) Choose an assessment
-            option(ng-repeat="assess in assessments") {{ assess.topic }}
+            option(ng-repeat="assess in assessments", value="{{ assess.$id }}") {{ assess.topic }}
       br
       br
       div.form-group
         label.col-md-3.control-label(for="description") Description:
         div.col-md-6
-          textarea#description.form-control(name="description", rows="7", ng-model="res.description", placeholder="Enter a description of your assignment...", required)
+          textarea#description.form-control(name="description", rows="7", ng-model="response.description", placeholder="Enter a description of your assignment...", required)
       br
       br
       br
       br
       br
       div.form-group
-        label.col-md-3.control-label(for="file-upload") File Upload:
+        label#file-upload-label.col-md-3.control-label(for="file-upload") File Upload:
         div.col-md-6
-          label#file-upload.form-control <span>Browse your files...</span> <input type="file" name="file-upload" accept=".zip,.png,.jpg,.psd" ng-model="res.fileUploaded">
+          input#file-upload.form-control(type="file", name="file-upload", accept=".zip,.png,.jpg,.psd", ng-model="response.fileUploaded")
       br
       br
       div.form-group
         div.col-md-offset-3.col-md-6
-          input.btn-submit.btn(type="Submit", value="SUBMIT", ng-disabled="submitAssignment.$invalid")
+          input.btn-submit.btn(type="Submit", value="SUBMIT", ng-click="send(response)", ng-disabled="submitAssignment.$invalid")
           input.btn-reset.btn(type="Reset", value="RESET")
       br
