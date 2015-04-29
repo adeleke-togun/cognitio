@@ -91,8 +91,8 @@ Cognitio.config(['$stateProvider','$locationProvider',
       templateUrl: 'views/users.html',
       controller: 'UsersCtrl'
     })
-    .state('users/id/submit', {
-      url: '/users/:userId/submit',
+    .state('submit', {
+      url: '/submit',
       templateUrl: 'views/submit.html',
       controller: 'SubmitCtrl'
     });
