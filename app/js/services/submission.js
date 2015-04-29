@@ -16,7 +16,7 @@ angular.module('cognitio.services')
           assessmentObject.submitted_by = name
           assessmentObject.submitted_by_email = email
           assessmentObject.description = assessment.description
-          // assessmentObject.uploaded_file = assessment.fileUploaded
+          // assessmentObject.file_url = assessment.fileUploaded
 
           return Refs.submissions.child(assessment_id).child(uid).set(assessmentObject)
         },

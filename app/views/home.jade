@@ -1,14 +1,14 @@
 section#home.main(is-authorized="")
+  include ../shared/notification
   .container-fluid
-    .margin-top.row
-      .col-md-12.notifications Notifications: There are currently no notifications at this time
+    .row
     .menu.row
       .submit.col-md-4.submitAssignment
         .options.submit
           .text-center.submitIcon
             img(src="../img/feedback-100.png")
           .text-center.submitClick
-            button.submitBtn.btn.btn-default.btn-lg.text-center Submit Assignment
+            a.submitBtn.btn.btn-default.btn-lg.text-center(href='/submit') Submit Assignment
       .col-md-4
         .options
           .text-center.submitIcon

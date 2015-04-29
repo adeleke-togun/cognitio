@@ -10,10 +10,13 @@
 }
 
 .notifications {
+  font-family: 'Alegreya Sans', sans-serif;
+  font-size: 1.25em;
   background-color: rgba(0, 0, 0, 0.6);
   color: white;
   min-height: 40px;
   padding-top: 10px;
+  padding-bottom: 10px;
   text-align: center;
   border-radius: 10px;
 }
@@ -23,7 +26,7 @@
 }
 
 .margin-top {
-  padding-top: 35px;
+  padding-top: 70px;
 }
 
 .submit {
