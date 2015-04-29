@@ -3,10 +3,6 @@ angular.module('cognitio.controllers')
   ['$scope', '$state', 'Authentication',
     function($scope, $state, Authentication) {
 
-    window.setTimeout(function() {
-      console.log($scope.currentUser);
-    }, 3000);
-
       $scope.logout = function() {
         Authentication.logout();
         $state.go('login');
