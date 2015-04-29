@@ -3,9 +3,9 @@ angular.module('cognitio.controllers')
   ['$scope', '$state', 'Authentication',
     function($scope, $state, Authentication) {
 
-      $scope.signOut = function() {
-        console.log("it came with the boiler plate");
-      };
+    window.setTimeout(function() {
+      console.log($scope.currentUser);
+    }, 3000);
 
       $scope.logout = function() {
         Authentication.logout();
