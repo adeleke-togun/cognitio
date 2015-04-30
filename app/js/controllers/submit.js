@@ -9,5 +9,6 @@ angular.module('cognitio.controllers')
   $scope.send = function (response) {
     Submission.submit(response.assessment_id, response);
     $location.path('/home');
+    toastr.success("Your assignment was submitted successfully!");
   };
 }]);
