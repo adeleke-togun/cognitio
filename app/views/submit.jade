@@ -24,7 +24,7 @@ section.container
       div.form-group
         label#file-upload-label.col-md-3.control-label(for="file-upload") File Upload:
         div.col-md-6
-          input#file-upload.form-control(type="file", name="file-upload", accept=".zip,.png,.jpg,.psd", ng-model="response.fileUploaded")
+          input#file-upload.form-control(type="file", name="file-upload", accept=".zip,.png,.jpg,.psd", ngf-select, ng-model="files")
       br
       br
       div.form-group
