@@ -12,7 +12,9 @@
     "underscore": "latest",
     "jquery": "~2.1.1",
     "angular-elastic": "~2.4.2",
-    "bootstrap": "~3.3.4"
+    "bootstrap": "~3.3.4",
+    "ng-file-upload": "~4.1.3",
+    "ng-file-upload-shim": "~4.1.3"
   },
   "resolutions": {
     "angular": "1.3.7",

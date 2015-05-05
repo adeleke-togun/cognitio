@@ -31,6 +31,7 @@ require('./js/controllers/submit.js');
 
 window.Cognitio = angular.module("Cognitio", [
   'ui.router',
+  'ngFileUpload',
   'cognitio.controllers',
   'cognitio.directives',
   'cognitio.filters',
