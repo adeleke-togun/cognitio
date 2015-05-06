@@ -54,5 +54,5 @@ function run(appdir, rootRef) {
 }
 
 firebaseAuth.authWithCustomToken(function(err, rootRef) {
-  run(process.cwd(), rootRef);
+  run(process.env.PWD, rootRef);
 });
