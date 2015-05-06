@@ -66,3 +66,7 @@
 .viewAssignment {
   padding-right: 0px;
 }
+
+.oddRows {
+  background-color: pink;
+}

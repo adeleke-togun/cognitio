@@ -6,7 +6,7 @@ angular.module('cognitio.services')
           if (!cb) {
             return $firebase(Refs.assessment).$asArray();
           } else {
-            Refs.assessment.on('value', function(snap) {
+            Refs.assessment.once('value', function(snap) {
               cb(snap.val());
             });
           }
