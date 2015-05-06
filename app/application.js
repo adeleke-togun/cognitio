@@ -27,6 +27,7 @@ require('./js/controllers/login.js');
 require('./js/controllers/menu.js');
 require('./js/controllers/users.js');
 require('./js/controllers/submit.js');
+require('./js/controllers/view-assessment.js');
 
 
 window.Cognitio = angular.module("Cognitio", [
@@ -96,7 +97,7 @@ Cognitio.config(['$stateProvider','$locationProvider',
         $rootScope.showPage();
       }]
     })
-    .state('default', {
+    .state('home', {
       url: '/home',
       templateUrl: 'views/home.html',
       controller: 'HomeCtrl'
@@ -115,5 +116,10 @@ Cognitio.config(['$stateProvider','$locationProvider',
       url: '/submit',
       templateUrl: 'views/submit.html',
       controller: 'SubmitCtrl'
+    })
+    .state('view assessment', {
+      url: '/view-assessment',
+      templateUrl: 'views/view-assessment.html',
+      controller: 'viewAssesmentCtrl'
     });
 }]);
