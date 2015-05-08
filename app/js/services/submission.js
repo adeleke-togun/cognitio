@@ -3,10 +3,10 @@ angular.module('cognitio.services')
     function($firebase, $rootScope, Refs) {
       return {
         all: function() {
+          // console.log('Firebase--->',$firebase(Refs.submissions));
           return $firebase(Refs.submissions).$asArray();
         },
         submit: function(assessment_id, assessment) {
-          console.log($rootScope.currentUser)
           var uid = $rootScope.currentUser.uid;
           var name = $rootScope.currentUser.name;
           var email = $rootScope.currentUser.email;
@@ -17,10 +17,10 @@ angular.module('cognitio.services')
           assessmentObject.submitted_by_email = email;
           assessmentObject.description = assessment.description;
           assessmentObject.file_url = assessment.file;
-          return Refs.submissions.child(assessment_id).child(uid).set(assessmentObject)
+          return Refs.submissions.child(assessment_id).child(uid).set(assessmentObject);
         },
-        getAllAssessmentSubmission: function(assessment_id) {
-          return $firebase(Refs.submissions.child(assessment_id)).$asObject();
+        findOne: function(id) {
+          return $firebase(Refs.submissions.child(id)).$asObject();
         } 
       };
     }

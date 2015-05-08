@@ -4,7 +4,6 @@ angular.module('cognitio.controllers')
 
   //retrieve all assessments
   $scope.assessments = Assessment.all();
-
   //grab form data and submit assessments
   $scope.send = function (response) {
     var fil = $scope.files[0]
