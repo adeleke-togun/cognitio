@@ -3,7 +3,7 @@ angular.module('cognitio.controllers')
   ['$scope', '$state', 'Authentication', 'Assessment',
     function($scope, $state, Authentication, Assessment) {
       var assessments = Assessment.all();
-      
+      console.log(assessments);
       assessments.$loaded(function(res) {
         $scope.assessments = res;
       });

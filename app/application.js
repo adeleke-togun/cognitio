@@ -28,6 +28,7 @@ require('./js/controllers/menu.js');
 require('./js/controllers/users.js');
 require('./js/controllers/submit.js');
 require('./js/controllers/view-assessment.js');
+require('./js/controllers/view-submitted-assessment.js');
 
 
 window.Cognitio = angular.module("Cognitio", [
@@ -121,5 +122,10 @@ Cognitio.config(['$stateProvider','$locationProvider',
       url: '/view-assessment',
       templateUrl: 'views/view-assessment.html',
       controller: 'viewAssesmentCtrl'
+    })
+    .state('submitted', {
+      url: '/view-assessment/:assessmentId',
+      templateUrl: 'views/view-submitted-assesment.html',
+      controller: 'viewSubmittedAssesmentCtrl'
     });
 }]);

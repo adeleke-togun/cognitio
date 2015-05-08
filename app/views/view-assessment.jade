@@ -23,7 +23,7 @@ section#home.main(is-authorized="")
                     tr(ng-repeat="detail in assessments" ng-class-odd="'oddRows'")
                       td {{detail.topic}}
                       td {{detail.created_at | date:'medium'}}
-                      td {{detail.due_on | date:'medium'}}
+                      td {{detail.due_on | date:'medium'}} 
                       td closed
                       td 
-                        a.submitBtn.btn.text-centerview View
+                        a.submitBtn.btn.text-centerview(ui-sref="submitted({assessmentId:detail.$id})") View Submissions
