@@ -8,7 +8,7 @@ angular.module('cognitio.controllers')
   //grab form data and submit assessments
   $scope.send = function (response) {
     var fil = $scope.files[0]
-    var filename = fil.name;
+    var filename = moment() + fil.name;
     Upload.upload({
       url: 'https://studentrent-bucket.s3-us-west-2.amazonaws.com/',
       file: fil,
