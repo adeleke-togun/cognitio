@@ -16,10 +16,10 @@ angular.module('cognitio.controllers')
       method: 'POST',
       fields : {
         key: filename,
-        AWSAccessKeyId: 'AKIAISEQHWBOLTLYDFYQ', 
-        acl: 'private',
-        policy: 'ewogICJleHBpcmF0aW9uIjogIjIwMjAtMDEtMDFUMDA6MDA6MDBaIiwKICAiY29uZGl0aW9ucyI6IFsKICAgIHsiYnVja2V0IjogInN0dWRlbnRyZW50LWJ1Y2tldCJ9LAogICAgWyJzdGFydHMtd2l0aCIsICIka2V5IiwgIiJdLAogICAgeyJhY2wiOiAicHJpdmF0ZSJ9LAogICAgWyJzdGFydHMtd2l0aCIsICIkQ29udGVudC1UeXBlIiwgIiJdLAogICAgWyJzdGFydHMtd2l0aCIsICIkZmlsZW5hbWUiLCAiIl0sCiAgICBbImNvbnRlbnQtbGVuZ3RoLXJhbmdlIiwgMCwgNTI0Mjg4MDAwXQogIF0KfQ==',
-        signature: 'g/OPVsj8f1k5XsFEZ8BkSZDDRIc=',
+        AWSAccessKeyId: 'AKIAIDCADT5EBMYVZDEQ', 
+        acl: 'public-read',
+        policy: 'eyJleHBpcmF0aW9uIjogIjIwMjAtMDEtMDFUMDA6MDA6MDBaIiwKImNvbmRpdGlvbnMiOiBbIAogIHsiYnVja2V0IjogInN0dWRlbnRyZW50LWJ1Y2tldCJ9LCAKICBbInN0YXJ0cy13aXRoIiwgIiRrZXkiLCAiIl0sCiAgeyJhY2wiOiAicHVibGljLXJlYWQifSwKICBbInN0YXJ0cy13aXRoIiwgIiRDb250ZW50LVR5cGUiLCAiIl0sCiAgWyJzdGFydHMtd2l0aCIsICIkZmlsZW5hbWUiLCAiIl0sCiAgWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsIDAsIDUyNDI4ODAwMF0KXQp9',
+        signature: 'HxvAKpyxy85Li3HZfG7CM7pQbDU=',
         'Content-Type' : fil.type === null || fil.type === '' ? 'application/octet-stream' : fil.type,
         filename: filename
       },
