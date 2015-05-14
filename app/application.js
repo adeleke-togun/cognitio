@@ -47,8 +47,16 @@ Cognitio.run(['$rootScope', '$state', 'Authentication', 'Refs', 'Toast','Authori
   $rootScope.authCallback = function(authData) {
     Authentication.auth(authData, function(user) {
       if(user) {
-        //you can redirect a user here to the admin page by checking the serivice
+        // check if admin, else continue as user
+        Authorization.isAuthorized().then(function(admin) {
+          if(admin) {
+            $state.go('admin');
+          }
+        });
+
+        //you can redirect a user here to the admin page by checking the service
         Toast('Welcome, ' + user.name + '!');
+        toastr.success('Welcome, ' + user.name + '!');
       }
       else {
         // logged out

@@ -8,10 +8,12 @@ angular.module('cognitio.directives')
         Authorization.isAuthorized().then(function(admin) {
           $rootScope.showPage = true;
           if(!admin) {
-            // window.location.pathname = '/login';
+            toastr.info("You're not authorized to view this page!");
+            window.location.pathname = '/user';
           }
           else{
             $scope.showPage = true;
+            toastr.success("Welcome, you are an Admin");
           }
         }, function (err) {
           $rootScope.showPage = false;

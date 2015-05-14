@@ -1,4 +1,4 @@
-nav.navbar.navbar-trans.navbar-fixed-top(role="navigation" ng-show="showPage && currentUser")
+nav.navbar.navbar-trans.navbar-fixed-top(role="navigation" ng-show="currentUser")
   .container-fluid
     .navbar-header
       button.navbar-toggle.collapsed(type="button", data-toggle="collapse", data-target="#navbar", aria-expanded="false", aria-controls="navbar")
@@ -6,7 +6,7 @@ nav.navbar.navbar-trans.navbar-fixed-top(role="navigation" ng-show="showPage && 
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand(ui-sref="home") Cognitio
+      a.navbar-brand(ui-sref="user") Cognitio
     #navbar.collapse.navbar-collapse
       ul.nav.navbar-nav
         li

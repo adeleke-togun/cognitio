@@ -35,7 +35,7 @@ angular.module('cognitio.services')
               // save the current user in the global scope
               $rootScope.currentUser = user;
               // navigate to home page
-              $state.go('home');
+              $state.go('user');
             }
             else {
               // construct the user record the way we want it
@@ -45,7 +45,7 @@ angular.module('cognitio.services')
               // save the current user in the global scope
               $rootScope.currentUser = user;
               // navigate to home page
-              $state.go('home');
+              $state.go('login');
             }
 
             // ...and we're done
