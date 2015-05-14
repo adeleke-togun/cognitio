@@ -22,13 +22,14 @@ require('./js/directives/authorization.js');
 
 
 /* load controllers */
-require('./js/controllers/home.js');
 require('./js/controllers/login.js');
 require('./js/controllers/menu.js');
-require('./js/controllers/users.js');
-require('./js/controllers/submit.js');
-require('./js/controllers/view-assessment.js');
-require('./js/controllers/view-submitted-assessment.js');
+require('./js/controllers/users_controllers/users_home.js');
+require('./js/controllers/users_controllers/submit.js');
+require('./js/controllers/users_controllers/users.js');
+require('./js/controllers/admin_controllers/admin_home.js');
+require('./js/controllers/admin_controllers/view-assessment.js');
+require('./js/controllers/admin_controllers/view-submitted-assessment.js');
 
 
 window.Cognitio = angular.module("Cognitio", [
@@ -51,6 +52,7 @@ Cognitio.run(['$rootScope', '$state', 'Authentication', 'Refs', 'Toast','Authori
         Authorization.isAuthorized().then(function(admin) {
           if(admin) {
             $state.go('admin');
+            toastr.success("Hi, " + user.name + ", you're an admin!");
           }
         });
 
@@ -106,34 +108,34 @@ Cognitio.config(['$stateProvider','$locationProvider',
         $rootScope.showPage();
       }]
     })
-    .state('home', {
-      url: '/home',
-      templateUrl: 'views/home.html',
-      controller: 'HomeCtrl'
+    .state('user', {
+      url: '/user',
+      templateUrl: 'views/users/home.html',
+      controller: 'UsersHomeCtrl'
     })
-    .state('users', {
-      url: '/users',
-      templateUrl: 'views/users.html',
-      controller: 'UsersCtrl'
-    })
-    .state('users/id', {
-      url: '/users/:userId',
-      templateUrl: 'views/users.html',
-      controller: 'UsersCtrl'
-    })
+    // .state('users/id', {
+    //   url: '/users/:userId',
+    //   templateUrl: 'views/users.html',
+    //   controller: 'UsersCtrl'
+    // })
     .state('submit', {
-      url: '/submit',
-      templateUrl: 'views/submit.html',
+      url: '/user/submit',
+      templateUrl: 'views/users/submit.html',
       controller: 'SubmitCtrl'
     })
-    .state('view assessment', {
-      url: '/view-assessment',
-      templateUrl: 'views/view-assessment.html',
+    .state('view-assessment', {
+      url: '/admin/view-assessment',
+      templateUrl: 'views/admin/view-assessment.html',
       controller: 'viewAssesmentCtrl'
     })
     .state('submitted', {
-      url: '/view-assessment/:assessmentId',
-      templateUrl: 'views/view-submitted-assesment.html',
+      url: '/admin/view-assessment/:assessmentId',
+      templateUrl: 'views/admin/view-submitted-assesment.html',
       controller: 'viewSubmittedAssesmentCtrl'
+    })
+    .state('admin', {
+      url: '/admin',
+      templateUrl: 'views/admin/home.html',
+      controller: 'AdminHomeCtrl'
     });
 }]);
