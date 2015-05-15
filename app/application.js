@@ -52,13 +52,13 @@ Cognitio.run(['$rootScope', '$state', 'Authentication', 'Refs', 'Toast','Authori
         Authorization.isAuthorized().then(function(admin) {
           if(admin) {
             $state.go('admin');
-            toastr.success("Hi, " + user.name + ", you're an admin!");
+            toastr.success("Hi, " + user.name + "<br />You're logged in as an Admin!");
+          }
+          else {
+            //you can redirect a user here to the admin page by checking the service
+            toastr.success('Welcome, ' + user.name + '!');
           }
         });
-
-        //you can redirect a user here to the admin page by checking the service
-        Toast('Welcome, ' + user.name + '!');
-        toastr.success('Welcome, ' + user.name + '!');
       }
       else {
         // logged out
