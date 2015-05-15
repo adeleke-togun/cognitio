@@ -1,29 +1,31 @@
-section#home.main(is-authorized ng-show="showPage")
-  include ../../shared/notification
-  .container-fluid
-    .row
-      .menu.row
-        .col-md-12
-          .row.pull-right
-            .col-md-12
-              a.submitBtn.btn.btn-default.btn-lg.text-center Create Assessment
-          .row
-            .col-md-12
-              .row.viewWrapper.blackFont All Assignnments
-              .row
-                table.table.blackFont
-                  thead
-                    tr
-                      th Topic
-                      th Start Date
-                      th Due Date
-                      th Status
-                      th 
-                  tbody
-                    tr(ng-repeat="detail in assessments" ng-class-odd="'oddRows'")
-                      td {{detail.topic}}
-                      td {{detail.created_at | date:'medium'}}
-                      td {{detail.due_on | date:'medium'}} 
-                      td closed
-                      td 
-                        a.submitBtn.btn.text-centerview(ui-sref="submitted({assessmentId:detail.$id})") View Submissions
+.container
+  section#home.main(is-authorized ng-show="showPage")
+    include ../../shared/admin_stamp
+    include ../../shared/notification
+    .container-fluid
+      .row
+        .menu.row
+          .col-md-12
+            .row.pull-right
+              .col-md-12
+                a.submitBtn.btn.btn-default.text-center Create Assessment
+            .row
+              .col-md-12
+                .row.viewWrapper.blackFont All Assignnments
+                .row
+                  table.table.blackFont
+                    thead
+                      tr
+                        th Topic
+                        th Start Date
+                        th Due Date
+                        th Status
+                        th 
+                    tbody
+                      tr(ng-repeat="detail in assessments" ng-class-odd="'oddRows'")
+                        td {{detail.topic}}
+                        td {{detail.created_at | date:'medium'}}
+                        td {{detail.due_on | date:'medium'}} 
+                        td closed
+                        td 
+                          a.submitBtn.btn.text-centerview(ui-sref="submitted({assessmentId:detail.$id})") View Submissions

@@ -4,7 +4,6 @@
   width: 100%;
   overflow: auto;
   height: 100%;
-  padding-top: 100px;
   padding-bottom: 50px;
   top: 0;
 }
@@ -34,7 +33,7 @@ section.main-page-container {
 
 @media (max-width: 768px) {
   #landing .section {
-    padding-top: 160px;
+    padding-top: 0;
   }
 }
 

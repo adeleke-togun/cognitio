@@ -13,7 +13,6 @@ angular.module('cognitio.directives')
           }
           else{
             $scope.showPage = true;
-            toastr.success("Welcome, you are an Admin");
           }
         }, function (err) {
           $rootScope.showPage = false;

@@ -7,7 +7,7 @@ font-family: 'Alegreya Sans', sans-serif; */
 
 #form-wrap {
 	font-family: 'Alegreya Sans', sans-serif;
-	margin-top: 30px;
+	margin-top: 50px;
 	padding: 10px;
 	padding-bottom: 70px;
 	background-image: url('../img/form-bg.png');
@@ -75,10 +75,24 @@ textarea#description {
 
 .btn-submit {
   margin-right: 40px;
+  color: #fff;
+}
+
+.btn-submit:disabled {
+	color: #000;
 }
 
 .btn-submit:focus,
-.btn-submit:active,
+.btn-submit:active {
+	outline: 0;
+	color: #000;
+}
+
+.btn-submit:hover {
+	border-color: #ccc;
+	color: #000;
+}
+
 .btn-reset:focus,
 .btn-reset:active,
 #file-upload:focus,
@@ -87,11 +101,10 @@ textarea#description {
 	color: #fff;
 }
 
-.btn-submit:hover,
 .btn-reset:hover,
 textarea#description:hover,
 select#assessment:hover,
 #file-upload:hover {
 	border-color: #ccc;
-	color: #fff
+	color: #fff;
 }
