@@ -2,11 +2,13 @@ angular.module('cognitio.controllers')
 .controller('viewSubmittedAssesmentCtrl',
   ['$scope', '$state', 'Authentication', 'Submission', '$stateParams',
     function($scope, $state, Authentication, Submission, $stateParams) {
+      
       $scope.int = function(){
         var submissions = Submission.all();
         submissions.$loaded(function(res) {
           $scope.submissions = res;
         });
+        
         $scope.assessmentId = $stateParams.assessmentId;
 
         if($scope.assessmentId) {

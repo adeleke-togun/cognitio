@@ -1,27 +1,28 @@
-angular.module('cognitio.services').factory('Authorization', ['$q', 'Refs', function($q, Refs) {
+angular.module('cognitio.services')
+  .factory('Authorization', ['$q', 'Refs', function($q, Refs) {
 
-  function isAuthorized() {
-    var deferred = $q.defer();
+    function isAuthorized() {
+      var deferred = $q.defer();
 
-    var authData = Refs.root.getAuth();
-    var adminRef;
-    if (!authData) {
-      deferred.reject('Not logged in');
+      var authData = Refs.root.getAuth();
+      var adminRef;
+      if (!authData) {
+        deferred.reject('Not logged in');
+        return deferred.promise;
+      }
+      if(authData && authData.google) {
+        var googleUid = 'google:'+ authData.google.id;
+        adminRef = Refs.root.child('admin').child(googleUid); // use google uid or mail instead
+      }
+
+      adminRef.on('value', function(adminSnap) {
+        console.log(adminSnap.val());
+        deferred.resolve(adminSnap.val());
+      });
       return deferred.promise;
     }
-    if(authData && authData.google) {
-      var googleUid = 'google:'+ authData.google.id;
-      adminRef = Refs.root.child('admin').child(googleUid); // use google uid or mail instead
-    }
 
-    adminRef.on('value', function(adminSnap) {
-      console.log(adminSnap.val());
-      deferred.resolve(adminSnap.val());
-    });
-    return deferred.promise;
-  }
-
-  return {
-    isAuthorized: isAuthorized
-  };
+    return {
+      isAuthorized: isAuthorized
+    };
 }]);

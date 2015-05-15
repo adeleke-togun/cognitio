@@ -4,6 +4,7 @@ angular.module('cognitio.controllers')
 
   //retrieve all assessments
   $scope.assessments = Assessment.all();
+
   //grab form data and submit assessments
   $scope.send = function (response) {
     var fil = $scope.files[0]
@@ -27,11 +28,9 @@ angular.module('cognitio.controllers')
       response.file = filename;
       Submission.submit(response.assessment_id, response)
       toastr.success("Your assignment was submitted successfully!");
-      $location.path('/home');
+      $location.path('/user');
     }).error(function(){
       toastr.info('Failed to uploaded to S3');
    });
- 
   };
-
 }]);
