@@ -23,13 +23,15 @@ require('./js/directives/authorization.js');
 
 
 /* load controllers */
-require('./js/controllers/home.js');
 require('./js/controllers/login.js');
 require('./js/controllers/menu.js');
-require('./js/controllers/users.js');
-require('./js/controllers/submit.js');
-require('./js/controllers/view-assessment.js');
-require('./js/controllers/view-submitted-assessment.js');
+require('./js/controllers/users_controllers/users_home.js');
+require('./js/controllers/users_controllers/submit.js');
+require('./js/controllers/users_controllers/users.js');
+require('./js/controllers/admin_controllers/admin_home.js');
+require('./js/controllers/admin_controllers/view-assessments.js');
+require('./js/controllers/admin_controllers/view-submitted-assessment.js');
+require('./js/controllers/admin_controllers/create-assessment.js');
 
 
 window.Cognitio = angular.module("Cognitio", [
@@ -48,8 +50,17 @@ Cognitio.run(['$rootScope', '$state', 'Authentication', 'Refs', 'Toast','Authori
   $rootScope.authCallback = function(authData) {
     Authentication.auth(authData, function(user) {
       if(user) {
-        //you can redirect a user here to the admin page by checking the serivice
-        Toast('Welcome, ' + user.name + '!');
+        // check if admin, else continue as user
+        Authorization.isAuthorized().then(function(admin) {
+          if(admin) {
+            $state.go('admin');
+            toastr.success("Hi, " + user.name + "<br />You're logged in as an Admin!");
+          }
+          else {
+            //you can redirect a user here to the admin page by checking the service
+            toastr.success('Welcome, ' + user.name + '!');
+          }
+        });
       }
       else {
         // logged out
@@ -99,62 +110,123 @@ Cognitio.config(['$stateProvider','$locationProvider',
         $rootScope.showPage();
       }]
     })
-    .state('home', {
-      url: '/home',
-      templateUrl: 'views/home.html',
-      controller: 'HomeCtrl'
+    .state('user', {
+      url: '/user',
+      templateUrl: 'views/users/home.html',
+      controller: 'UsersHomeCtrl'
     })
-    .state('users', {
-      url: '/users',
-      templateUrl: 'views/users.html',
-      controller: 'UsersCtrl'
-    })
-    .state('users/id', {
-      url: '/users/:userId',
-      templateUrl: 'views/users.html',
-      controller: 'UsersCtrl'
-    })
+    // .state('users/id', {
+    //   url: '/users/:userId',
+    //   templateUrl: 'views/users.html',
+    //   controller: 'UsersCtrl'
+    // })
     .state('submit', {
-      url: '/submit',
-      templateUrl: 'views/submit.html',
+      url: '/user/submit',
+      templateUrl: 'views/users/submit.html',
       controller: 'SubmitCtrl'
     })
-    .state('view assessment', {
-      url: '/view-assessment',
-      templateUrl: 'views/view-assessment.html',
+    .state('admin', {
+      url: '/admin',
+      templateUrl: 'views/admin/home.html',
+      controller: 'AdminHomeCtrl'
+    })
+    .state('view-assessments', {
+      url: '/admin/view-assessments',
+      templateUrl: 'views/admin/view-assessments.html',
       controller: 'viewAssesmentCtrl'
     })
     .state('submitted', {
-      url: '/view-assessment/:assessmentId',
-      templateUrl: 'views/view-submitted-assesment.html',
+      url: '/admin/view-assessment/:assessmentId',
+      templateUrl: 'views/admin/view-submitted-assesment.html',
       controller: 'viewSubmittedAssesmentCtrl'
+    })
+    .state('create-assessment', {
+      url: '/admin/create-assessment',
+      templateUrl: 'views/admin/create-assessment.html',
+      controller: 'CreateAssessmentCtrl'
     });
 }]);
 
-},{"./js/controllers/home.js":2,"./js/controllers/login.js":3,"./js/controllers/menu.js":4,"./js/controllers/submit.js":5,"./js/controllers/users.js":6,"./js/controllers/view-assessment.js":7,"./js/controllers/view-submitted-assessment.js":8,"./js/directives/authorization.js":9,"./js/filters/reverse.js":10,"./js/services/assessment.js":11,"./js/services/authentication.js":12,"./js/services/authorization.js":13,"./js/services/feedback.js":14,"./js/services/refs.js":15,"./js/services/submission.js":16,"./js/services/toast.js":17,"./js/services/users.js":18}],2:[function(require,module,exports){
+},{"./js/controllers/admin_controllers/admin_home.js":2,"./js/controllers/admin_controllers/create-assessment.js":3,"./js/controllers/admin_controllers/view-assessments.js":4,"./js/controllers/admin_controllers/view-submitted-assessment.js":5,"./js/controllers/login.js":6,"./js/controllers/menu.js":7,"./js/controllers/users_controllers/submit.js":8,"./js/controllers/users_controllers/users.js":9,"./js/controllers/users_controllers/users_home.js":10,"./js/directives/authorization.js":11,"./js/filters/reverse.js":12,"./js/services/assessment.js":13,"./js/services/authentication.js":14,"./js/services/authorization.js":15,"./js/services/feedback.js":16,"./js/services/refs.js":17,"./js/services/submission.js":18,"./js/services/toast.js":19,"./js/services/users.js":20}],2:[function(require,module,exports){
 angular.module('cognitio.controllers')
-.controller('HomeCtrl',
-  ['$scope', '$state', 'Authentication',
+  .controller('AdminHomeCtrl', ['$scope', '$state', 'Authentication',
     function($scope, $state, Authentication) {
-      console.log("Which kain witch craft?");
+    
       $scope.logout = function() {
         Authentication.logout();
         $state.go('login');
       };
     }
- ]);
+]);
 
 },{}],3:[function(require,module,exports){
 angular.module('cognitio.controllers')
-.controller('LoginCtrl', ['$scope', 'Authentication', 
-  function($scope, Authentication) {
-    $scope.login = function() {
-      Authentication.login();
-    };
-  }
+  .controller('CreateAssessmentCtrl', ['$scope', 'Assessment', '$location', 
+  	function ($scope, Assessment, $location) {
+
+  	  $scope.send = function(response) {
+  	  	Assessment.create(response);
+  	  	toastr.success("Assessment created successfully!");
+  	  	$location.path('/admin');
+  	  };
+    }
+]);
+},{}],4:[function(require,module,exports){
+angular.module('cognitio.controllers')
+  .controller('viewAssesmentCtrl', ['$scope', '$state', 'Authentication', 'Assessment',
+    function($scope, $state, Authentication, Assessment) {
+      
+      var assessments = Assessment.all();
+      
+      assessments.$loaded(function(res) {
+        $scope.assessments = res;
+      });
+    }
 ]);
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
+angular.module('cognitio.controllers')
+.controller('viewSubmittedAssesmentCtrl',
+  ['$scope', '$state', 'Authentication', 'Submission', '$stateParams',
+    function($scope, $state, Authentication, Submission, $stateParams) {
+      
+      $scope.int = function(){
+        var submissions = Submission.all();
+        submissions.$loaded(function(res) {
+          $scope.submissions = res;
+        });
+        
+        $scope.assessmentId = $stateParams.assessmentId;
+
+        if($scope.assessmentId) {
+          $scope.selectSubmission(Submission.findOne($scope.assessmentId));
+        }
+      };
+
+      $scope.selectSubmission = function(submission) {
+        submission.$loaded(function(res) {
+          delete res.$$conf;
+          delete res.$id;
+          delete res.$priority;
+          $scope.submitted = res;
+        });
+      };
+      $scope.int();
+    }
+ ]);
+
+
+},{}],6:[function(require,module,exports){
+angular.module('cognitio.controllers')
+	.controller('LoginCtrl', ['$scope', 'Authentication',
+	  function($scope, Authentication) {
+	    $scope.login = function() {
+	      Authentication.login();
+	    };
+	  }
+]);
+
+},{}],7:[function(require,module,exports){
 angular.module('cognitio.controllers')
 .controller('MenuCtrl', ['$scope',
   function($scope) {
@@ -170,13 +242,14 @@ angular.module('cognitio.controllers')
   }
 ]);
 
-},{}],5:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 angular.module('cognitio.controllers')
 .controller('SubmitCtrl', ['$scope', 'Assessment', 'Submission', '$location', 'Upload', 
 	function ($scope, Assessment, Submission, $location, Upload) {
 
   //retrieve all assessments
   $scope.assessments = Assessment.all();
+
   //grab form data and submit assessments
   $scope.send = function (response) {
     var fil = $scope.files[0]
@@ -200,15 +273,13 @@ angular.module('cognitio.controllers')
       response.file = filename;
       Submission.submit(response.assessment_id, response)
       toastr.success("Your assignment was submitted successfully!");
-      $location.path('/home');
+      $location.path('/user');
     }).error(function(){
       toastr.info('Failed to uploaded to S3');
    });
- 
   };
-
 }]);
-},{}],6:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 angular.module('cognitio.controllers')
   .controller('UsersCtrl',['$scope', '$stateParams', 'Toast', 'Users',
     function($scope, $stateParams, Toast, Users) {
@@ -232,50 +303,20 @@ angular.module('cognitio.controllers')
       };
     }
   ]);
-},{}],7:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 angular.module('cognitio.controllers')
-.controller('viewAssesmentCtrl',
-  ['$scope', '$state', 'Authentication', 'Assessment',
-    function($scope, $state, Authentication, Assessment) {
-      var assessments = Assessment.all();
-      console.log(assessments);
-      assessments.$loaded(function(res) {
-        $scope.assessments = res;
-      });
+.controller('UsersHomeCtrl',
+  ['$scope', '$state', 'Authentication',
+    function($scope, $state, Authentication) {
+    
+      $scope.logout = function() {
+        Authentication.logout();
+        $state.go('login');
+      };
     }
  ]);
 
-},{}],8:[function(require,module,exports){
-angular.module('cognitio.controllers')
-.controller('viewSubmittedAssesmentCtrl',
-  ['$scope', '$state', 'Authentication', 'Submission', '$stateParams',
-    function($scope, $state, Authentication, Submission, $stateParams) {
-      $scope.int = function(){
-        var submissions = Submission.all();
-        submissions.$loaded(function(res) {
-          $scope.submissions = res;
-        });
-        $scope.assessmentId = $stateParams.assessmentId;
-
-        if($scope.assessmentId) {
-          $scope.selectSubmission(Submission.findOne($scope.assessmentId));
-        }
-      };
-
-      $scope.selectSubmission = function(submission) {
-        submission.$loaded(function(res) {
-          delete res.$$conf;
-          delete res.$id;
-          delete res.$priority;
-          $scope.submitted = res;
-        });
-      };
-      $scope.int();
-    }
- ]);
-
-
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 // this is a directive to check if a logged in user is admin else it redirects to login include in the admin pages
 angular.module('cognitio.directives')
   .directive('isAuthorized', function() {
@@ -286,7 +327,8 @@ angular.module('cognitio.directives')
         Authorization.isAuthorized().then(function(admin) {
           $rootScope.showPage = true;
           if(!admin) {
-            // window.location.pathname = '/login';
+            toastr.info("You're not authorized to view this page!");
+            window.location.pathname = '/user';
           }
           else{
             $scope.showPage = true;
@@ -299,7 +341,7 @@ angular.module('cognitio.directives')
     };
   });
 
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 angular.module("cognitio.filters")
  .filter('reverse', function() {
   function toArray(list) {
@@ -321,10 +363,10 @@ angular.module("cognitio.filters")
   };
 });
 
-},{}],11:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 angular.module('cognitio.services')
-  .factory('Assessment', ['Refs', '$firebase',
-    function(Refs, $firebase) {
+  .factory('Assessment', ['Refs', '$firebase', '$rootScope',
+    function(Refs, $firebase, $rootScope) {
       return {
         all: function(cb) {
           if (!cb) {
@@ -346,7 +388,23 @@ angular.module('cognitio.services')
           }
         },
 
-        create: function(newAssessment, cb) {
+        create: function(rawAssessment, cb) {
+          //grab the details of signed in users from rootScope
+          var uid = $rootScope.currentUser.uid;
+          var name = $rootScope.currentUser.name;
+          var email = $rootScope.currentUser.email;
+
+          var newAssessment = {};
+
+          newAssessment.created_at = Firebase.ServerValue.TIMESTAMP;
+          newAssessment.creator = name;
+          newAssessment.creator_email = email;
+          newAssessment.creator_uid = uid;
+          newAssessment.due_on = rawAssessment.due_on;
+          newAssessment.topic = rawAssessment.topic;
+          newAssessment.description = rawAssessment.description;
+          newAssessment.updated_at = Firebase.ServerValue.TIMESTAMP;
+
           Refs.assessment.push(newAssessment, function(error) {
             if (error) {
               cb();
@@ -371,7 +429,7 @@ angular.module('cognitio.services')
     }
   ]);
 
-},{}],12:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 angular.module('cognitio.services')
   .factory('Authentication', ['$cookies', '$firebase', '$rootScope','$state', 'Refs',
     function($cookies, $firebase, $rootScope, $state, Refs) {
@@ -409,7 +467,7 @@ angular.module('cognitio.services')
               // save the current user in the global scope
               $rootScope.currentUser = user;
               // navigate to home page
-              $state.go('home');
+              $state.go('user');
             }
             else {
               // construct the user record the way we want it
@@ -419,7 +477,7 @@ angular.module('cognitio.services')
               // save the current user in the global scope
               $rootScope.currentUser = user;
               // navigate to home page
-              $state.go('home');
+              $state.go('login');
             }
 
             // ...and we're done
@@ -444,36 +502,37 @@ angular.module('cognitio.services')
     }
   ]);
 
-},{}],13:[function(require,module,exports){
-angular.module('cognitio.services').factory('Authorization', ['$q', 'Refs', function($q, Refs) {
+},{}],15:[function(require,module,exports){
+angular.module('cognitio.services')
+  .factory('Authorization', ['$q', 'Refs', function($q, Refs) {
 
-  function isAuthorized() {
-    var deferred = $q.defer();
+    function isAuthorized() {
+      var deferred = $q.defer();
 
-    var authData = Refs.root.getAuth();
-    var adminRef;
-    if (!authData) {
-      deferred.reject('Not logged in');
+      var authData = Refs.root.getAuth();
+      var adminRef;
+      if (!authData) {
+        deferred.reject('Not logged in');
+        return deferred.promise;
+      }
+      if(authData && authData.google) {
+        var googleUid = 'google:'+ authData.google.id;
+        adminRef = Refs.root.child('admin').child(googleUid); // use google uid or mail instead
+      }
+
+      adminRef.on('value', function(adminSnap) {
+        console.log(adminSnap.val());
+        deferred.resolve(adminSnap.val());
+      });
       return deferred.promise;
     }
-    if(authData && authData.google) {
-      var googleUid = 'google:'+ authData.google.id;
-      adminRef = Refs.root.child('admin').child(googleUid); // use google uid or mail instead
-    }
 
-    adminRef.on('value', function(adminSnap) {
-      console.log(adminSnap.val());
-      deferred.resolve(adminSnap.val());
-    });
-    return deferred.promise;
-  }
-
-  return {
-    isAuthorized: isAuthorized
-  };
+    return {
+      isAuthorized: isAuthorized
+    };
 }]);
 
-},{}],14:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 angular.module('cognitio.services')
   .factory('Feedback', ['$firebase', '$rootScope', 'Refs',
     function($firebase, $rootScope, Refs) {
@@ -510,7 +569,7 @@ angular.module('cognitio.services')
     }
   ]);
 
-},{}],15:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 angular.module('cognitio.services')
   .factory('Refs', ['$cookies', '$firebase',
     function($cookies, $firebase) {
@@ -527,7 +586,7 @@ angular.module('cognitio.services')
     }
   ]);
 
-},{}],16:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 angular.module('cognitio.services')
   .factory('Submission', ['$firebase', '$rootScope', 'Refs',
     function($firebase, $rootScope, Refs) {
@@ -542,11 +601,13 @@ angular.module('cognitio.services')
           var email = $rootScope.currentUser.email;
 
           var assessmentObject = {};
+
           assessmentObject.submitted_at = Firebase.ServerValue.TIMESTAMP;
           assessmentObject.submitted_by = name;
           assessmentObject.submitted_by_email = email;
           assessmentObject.description = assessment.description;
           assessmentObject.file_url = assessment.file;
+
           return Refs.submissions.child(assessment_id).child(uid).set(assessmentObject);
         },
         findOne: function(id) {
@@ -556,7 +617,7 @@ angular.module('cognitio.services')
     }
   ]);
 
-},{}],17:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 angular.module('cognitio.services')
   .factory('Toast', [function($mdToast){
     return function(text, hideDelay, position, cb) {
@@ -572,7 +633,7 @@ angular.module('cognitio.services')
     };
   }]);
 
-},{}],18:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 angular.module('cognitio.services')
   .factory('Users', ['$firebase', 'Refs',
     function($firebase, Refs) {

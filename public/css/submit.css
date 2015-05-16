@@ -5,7 +5,7 @@ font-family: 'Port Lligat Sans', sans-serif;
 font-family: 'Alegreya Sans', sans-serif; */
 #form-wrap {
   font-family: 'Alegreya Sans', sans-serif;
-  margin-top: 30px;
+  margin-top: 50px;
   padding: 10px;
   padding-bottom: 70px;
   background-image: url('../img/form-bg.png');
@@ -25,11 +25,13 @@ font-family: 'Alegreya Sans', sans-serif; */
 }
 #submit-form {
   font-size: 1.5em;
-  line-height: 2;
+  line-height: 3;
 }
 .form-top {
   margin-top: 20px;
 }
+input#topic,
+input#due,
 textarea#description,
 select#assessment,
 #file-upload {
@@ -63,9 +65,20 @@ textarea#description {
 }
 .btn-submit {
   margin-right: 40px;
+  color: #fff;
+}
+.btn-submit:disabled {
+  color: #000;
 }
 .btn-submit:focus,
-.btn-submit:active,
+.btn-submit:active {
+  outline: 0;
+  color: #000;
+}
+.btn-submit:hover {
+  border-color: #ccc;
+  color: #000;
+}
 .btn-reset:focus,
 .btn-reset:active,
 #file-upload:focus,
@@ -73,11 +86,16 @@ textarea#description {
   outline: 0;
   color: #fff;
 }
-.btn-submit:hover,
+input#topic:hover,
+input#due:hover,
 .btn-reset:hover,
 textarea#description:hover,
 select#assessment:hover,
 #file-upload:hover {
   border-color: #ccc;
-  color: #ffffff;
+  color: #fff;
+}
+.clear-form-float {
+  clear: both;
+  padding-top: 20px;
 }

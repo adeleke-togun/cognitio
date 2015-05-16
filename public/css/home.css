@@ -8,7 +8,8 @@
   color: white;
   min-height: 250px;
 }
-.notifications {
+.notifications,
+.ad-stamp {
   font-family: 'Alegreya Sans', sans-serif;
   font-size: 1.25em;
   background-color: rgba(0, 0, 0, 0.6);
@@ -19,11 +20,14 @@
   text-align: center;
   border-radius: 10px;
 }
+.ad-stamp {
+  margin-top: 30px;
+}
 .menu {
   padding-top: 55px;
 }
 .margin-top {
-  padding-top: 70px;
+  padding-top: 50px;
 }
 .submit {
   border-top-left-radius: 5px;
