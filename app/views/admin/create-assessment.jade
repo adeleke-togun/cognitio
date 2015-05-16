@@ -1,0 +1,24 @@
+.container
+  section#home.main(is-authorized ng-show="showPage")
+    include ../../shared/admin_stamp
+    include ../../shared/notification
+    .container-fluid
+      div#form-wrap
+        p.submit-head CREATE AN ASSESSMENT
+        form#submit-form(name="createAssessment")
+          div.form-group.form-top
+            label.col-md-3.control-label(for="topic") Topic:
+            div.col-md-6
+              input#topic.form-control(type="text", name="topic", ng-model="response.topic" placeholder="What is the topic of this assessment?", required)
+          div.clear-form-float.form-group
+            label.col-md-3.control-label(for="description") Description:
+            div.col-md-6
+              textarea#description.form-control(name="description", rows="7", ng-model="response.description", placeholder="Enter a description and reequirement for this assessment... (Include link(s) to images or .psd required)", required)
+          div.clear-form-float.form-group
+            label.col-md-3.control-label(for="due") Due On:
+            div.col-md-6
+              input#due.form-control(type="date", name="due", ng-model="response.due_on", required)
+          div.clear-form-float.form-group
+            div.col-md-offset-3.col-md-6
+              input.btn-submit.btn.btn-default(type="Submit", value="SUBMIT", ng-click="send(response)", ng-disabled="createAssessment.$invalid")
+              input.btn-reset.btn(type="Reset", value="RESET")

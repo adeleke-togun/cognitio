@@ -1,6 +1,6 @@
 angular.module('cognitio.services')
-  .factory('Assessment', ['Refs', '$firebase',
-    function(Refs, $firebase) {
+  .factory('Assessment', ['Refs', '$firebase', '$rootScope',
+    function(Refs, $firebase, $rootScope) {
       return {
         all: function(cb) {
           if (!cb) {
@@ -22,7 +22,23 @@ angular.module('cognitio.services')
           }
         },
 
-        create: function(newAssessment, cb) {
+        create: function(rawAssessment, cb) {
+          //grab the details of signed in users from rootScope
+          var uid = $rootScope.currentUser.uid;
+          var name = $rootScope.currentUser.name;
+          var email = $rootScope.currentUser.email;
+
+          var newAssessment = {};
+
+          newAssessment.created_at = Firebase.ServerValue.TIMESTAMP;
+          newAssessment.creator = name;
+          newAssessment.creator_email = email;
+          newAssessment.creator_uid = uid;
+          newAssessment.due_on = rawAssessment.due_on;
+          newAssessment.topic = rawAssessment.topic;
+          newAssessment.description = rawAssessment.description;
+          newAssessment.updated_at = Firebase.ServerValue.TIMESTAMP;
+
           Refs.assessment.push(newAssessment, function(error) {
             if (error) {
               cb();

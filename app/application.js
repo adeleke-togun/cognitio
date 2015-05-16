@@ -28,8 +28,9 @@ require('./js/controllers/users_controllers/users_home.js');
 require('./js/controllers/users_controllers/submit.js');
 require('./js/controllers/users_controllers/users.js');
 require('./js/controllers/admin_controllers/admin_home.js');
-require('./js/controllers/admin_controllers/view-assessment.js');
+require('./js/controllers/admin_controllers/view-assessments.js');
 require('./js/controllers/admin_controllers/view-submitted-assessment.js');
+require('./js/controllers/admin_controllers/create-assessment.js');
 
 
 window.Cognitio = angular.module("Cognitio", [
@@ -123,9 +124,14 @@ Cognitio.config(['$stateProvider','$locationProvider',
       templateUrl: 'views/users/submit.html',
       controller: 'SubmitCtrl'
     })
-    .state('view-assessment', {
-      url: '/admin/view-assessment',
-      templateUrl: 'views/admin/view-assessment.html',
+    .state('admin', {
+      url: '/admin',
+      templateUrl: 'views/admin/home.html',
+      controller: 'AdminHomeCtrl'
+    })
+    .state('view-assessments', {
+      url: '/admin/view-assessments',
+      templateUrl: 'views/admin/view-assessments.html',
       controller: 'viewAssesmentCtrl'
     })
     .state('submitted', {
@@ -133,9 +139,9 @@ Cognitio.config(['$stateProvider','$locationProvider',
       templateUrl: 'views/admin/view-submitted-assesment.html',
       controller: 'viewSubmittedAssesmentCtrl'
     })
-    .state('admin', {
-      url: '/admin',
-      templateUrl: 'views/admin/home.html',
-      controller: 'AdminHomeCtrl'
+    .state('create-assessment', {
+      url: '/admin/create-assessment',
+      templateUrl: 'views/admin/create-assessment.html',
+      controller: 'CreateAssessmentCtrl'
     });
 }]);

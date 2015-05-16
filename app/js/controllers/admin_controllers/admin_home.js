@@ -1,6 +1,5 @@
 angular.module('cognitio.controllers')
-.controller('AdminHomeCtrl',
-  ['$scope', '$state', 'Authentication',
+  .controller('AdminHomeCtrl', ['$scope', '$state', 'Authentication',
     function($scope, $state, Authentication) {
     
       $scope.logout = function() {
@@ -8,4 +7,4 @@ angular.module('cognitio.controllers')
         $state.go('login');
       };
     }
- ]);
+]);
