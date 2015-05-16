@@ -12,11 +12,13 @@ angular.module('cognitio.services')
           var email = $rootScope.currentUser.email;
 
           var assessmentObject = {};
+
           assessmentObject.submitted_at = Firebase.ServerValue.TIMESTAMP;
           assessmentObject.submitted_by = name;
           assessmentObject.submitted_by_email = email;
           assessmentObject.description = assessment.description;
           assessmentObject.file_url = assessment.file;
+
           return Refs.submissions.child(assessment_id).child(uid).set(assessmentObject);
         },
         findOne: function(id) {

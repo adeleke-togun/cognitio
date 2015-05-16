@@ -1,6 +1,5 @@
 angular.module('cognitio.controllers')
-.controller('viewAssesmentCtrl',
-  ['$scope', '$state', 'Authentication', 'Assessment',
+  .controller('viewAssesmentCtrl', ['$scope', '$state', 'Authentication', 'Assessment',
     function($scope, $state, Authentication, Assessment) {
       
       var assessments = Assessment.all();
@@ -9,4 +8,4 @@ angular.module('cognitio.controllers')
         $scope.assessments = res;
       });
     }
- ]);
+]);

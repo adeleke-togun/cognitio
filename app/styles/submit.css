@@ -29,13 +29,15 @@ font-family: 'Alegreya Sans', sans-serif; */
 
 #submit-form {
 	font-size: 1.5em;
-	line-height: 2;
+	line-height: 3;
 }
 
 .form-top {
 	margin-top: 20px;
 }
 
+input#topic,
+input#due,
 textarea#description,
 select#assessment,
 #file-upload {	
@@ -101,10 +103,17 @@ textarea#description {
 	color: #fff;
 }
 
+input#topic:hover,
+input#due:hover,
 .btn-reset:hover,
 textarea#description:hover,
 select#assessment:hover,
 #file-upload:hover {
 	border-color: #ccc;
 	color: #fff;
+}
+
+.clear-form-float {
+	clear: both;
+	padding-top: 20px;
 }
