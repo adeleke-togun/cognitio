@@ -14,6 +14,7 @@ require('./js/services/authorization.js');
 require('./js/services/assessment.js');
 require('./js/services/submission.js');
 require('./js/services/feedback.js');
+require('./js/services/forum.js');
 
 /* load filters */
 require('./js/filters/reverse.js');
@@ -28,6 +29,7 @@ require('./js/controllers/menu.js');
 require('./js/controllers/users_controllers/users_home.js');
 require('./js/controllers/users_controllers/submit.js');
 require('./js/controllers/users_controllers/users.js');
+require('./js/controllers/users_controllers/forum.js');
 require('./js/controllers/admin_controllers/admin_home.js');
 require('./js/controllers/admin_controllers/view-assessments.js');
 require('./js/controllers/admin_controllers/view-submitted-assessment.js');
@@ -74,23 +76,23 @@ Cognitio.run(['$rootScope', '$state', 'Authentication', 'Refs', 'Toast','Authori
 }]);
 
 //Toastr setup options
-      toastr.options = {
-        "closeButton": true,
-        "debug": false,
-        "newestOnTop": true,
-        "progressBar": false,
-        "positionClass": "toast-top-center",
-        "preventDuplicates": true,
-        "onclick": null,
-        "showDuration": "800",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-      }
+toastr.options = {
+  "closeButton": true,
+  "debug": false,
+  "newestOnTop": true,
+  "progressBar": false,
+  "positionClass": "toast-top-center",
+  "preventDuplicates": true,
+  "onclick": null,
+  "showDuration": "800",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
 
 /* application routes */
 Cognitio.config(['$stateProvider','$locationProvider',
@@ -115,11 +117,6 @@ Cognitio.config(['$stateProvider','$locationProvider',
       templateUrl: 'views/users/home.html',
       controller: 'UsersHomeCtrl'
     })
-    // .state('users/id', {
-    //   url: '/users/:userId',
-    //   templateUrl: 'views/users.html',
-    //   controller: 'UsersCtrl'
-    // })
     .state('submit', {
       url: '/user/submit',
       templateUrl: 'views/users/submit.html',
@@ -129,6 +126,11 @@ Cognitio.config(['$stateProvider','$locationProvider',
       url: '/admin',
       templateUrl: 'views/admin/home.html',
       controller: 'AdminHomeCtrl'
+    })
+    .state('forum', {
+      url: '/user/forum',
+      templateUrl: 'views/users/need-help.html',
+      controller: 'ForumCtrl'
     })
     .state('view-assessments', {
       url: '/admin/view-assessments',
@@ -147,7 +149,7 @@ Cognitio.config(['$stateProvider','$locationProvider',
     });
 }]);
 
-},{"./js/controllers/admin_controllers/admin_home.js":2,"./js/controllers/admin_controllers/create-assessment.js":3,"./js/controllers/admin_controllers/view-assessments.js":4,"./js/controllers/admin_controllers/view-submitted-assessment.js":5,"./js/controllers/login.js":6,"./js/controllers/menu.js":7,"./js/controllers/users_controllers/submit.js":8,"./js/controllers/users_controllers/users.js":9,"./js/controllers/users_controllers/users_home.js":10,"./js/directives/authorization.js":11,"./js/filters/reverse.js":12,"./js/services/assessment.js":13,"./js/services/authentication.js":14,"./js/services/authorization.js":15,"./js/services/feedback.js":16,"./js/services/refs.js":17,"./js/services/submission.js":18,"./js/services/toast.js":19,"./js/services/users.js":20}],2:[function(require,module,exports){
+},{"./js/controllers/admin_controllers/admin_home.js":2,"./js/controllers/admin_controllers/create-assessment.js":3,"./js/controllers/admin_controllers/view-assessments.js":4,"./js/controllers/admin_controllers/view-submitted-assessment.js":5,"./js/controllers/login.js":6,"./js/controllers/menu.js":7,"./js/controllers/users_controllers/forum.js":8,"./js/controllers/users_controllers/submit.js":9,"./js/controllers/users_controllers/users.js":10,"./js/controllers/users_controllers/users_home.js":11,"./js/directives/authorization.js":12,"./js/filters/reverse.js":13,"./js/services/assessment.js":14,"./js/services/authentication.js":15,"./js/services/authorization.js":16,"./js/services/feedback.js":17,"./js/services/forum.js":18,"./js/services/refs.js":19,"./js/services/submission.js":20,"./js/services/toast.js":21,"./js/services/users.js":22}],2:[function(require,module,exports){
 angular.module('cognitio.controllers')
   .controller('AdminHomeCtrl', ['$scope', '$state', 'Authentication',
     function($scope, $state, Authentication) {
@@ -244,6 +246,59 @@ angular.module('cognitio.controllers')
 
 },{}],8:[function(require,module,exports){
 angular.module('cognitio.controllers')
+.controller('ForumCtrl', ['$scope', 'Forum', 'Users', function ($scope, Forum, Users) {
+  //retrieve all discussion
+  $scope.id = null;
+
+  Forum.all().$loaded(function(response) {
+    $scope.discussions = response;
+  });
+
+  $scope.askQuestion = function(question) {
+    if(question != undefined) {
+      Forum.ask(question).then(function(res) {
+        toastr.success("question added successfully");
+        $('#questionModal').modal('hide')
+      });
+    }
+    else {
+      toastr.error("Fill the form first");
+    }
+    
+  };
+
+  $scope.findUser = function (id) {
+    return Users.find(id);
+  }
+
+  $scope.like = function(id, value) {
+    Forum.upVote(id, value);
+  }
+
+  $scope.dislike = function (id, value) {
+    Forum.downVote(id, value);
+  }
+
+  $scope.saveComment = function(comment) {
+    if(comment != undefined) {
+      Forum.comment($scope.id, comment).then(function(res) {
+        toastr.success("comment added successfully")
+        $('#commentModal').modal('hide')
+      })
+    }
+    else {
+      toastr.error("Fill the form first");
+    }
+  };
+
+  $('#commentModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); 
+    $scope.id = button.data('value');
+  })
+  
+}]);
+},{}],9:[function(require,module,exports){
+angular.module('cognitio.controllers')
 .controller('SubmitCtrl', ['$scope', 'Assessment', 'Submission', '$location', 'Upload', 
 	function ($scope, Assessment, Submission, $location, Upload) {
 
@@ -279,7 +334,7 @@ angular.module('cognitio.controllers')
    });
   };
 }]);
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 angular.module('cognitio.controllers')
   .controller('UsersCtrl',['$scope', '$stateParams', 'Toast', 'Users',
     function($scope, $stateParams, Toast, Users) {
@@ -303,7 +358,7 @@ angular.module('cognitio.controllers')
       };
     }
   ]);
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 angular.module('cognitio.controllers')
 .controller('UsersHomeCtrl',
   ['$scope', '$state', 'Authentication',
@@ -316,7 +371,7 @@ angular.module('cognitio.controllers')
     }
  ]);
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 // this is a directive to check if a logged in user is admin else it redirects to login include in the admin pages
 angular.module('cognitio.directives')
   .directive('isAuthorized', function() {
@@ -341,7 +396,7 @@ angular.module('cognitio.directives')
     };
   });
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 angular.module("cognitio.filters")
  .filter('reverse', function() {
   function toArray(list) {
@@ -363,7 +418,7 @@ angular.module("cognitio.filters")
   };
 });
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 angular.module('cognitio.services')
   .factory('Assessment', ['Refs', '$firebase', '$rootScope',
     function(Refs, $firebase, $rootScope) {
@@ -429,7 +484,7 @@ angular.module('cognitio.services')
     }
   ]);
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 angular.module('cognitio.services')
   .factory('Authentication', ['$cookies', '$firebase', '$rootScope','$state', 'Refs',
     function($cookies, $firebase, $rootScope, $state, Refs) {
@@ -502,7 +557,7 @@ angular.module('cognitio.services')
     }
   ]);
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 angular.module('cognitio.services')
   .factory('Authorization', ['$q', 'Refs', function($q, Refs) {
 
@@ -532,7 +587,7 @@ angular.module('cognitio.services')
     };
 }]);
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 angular.module('cognitio.services')
   .factory('Feedback', ['$firebase', '$rootScope', 'Refs',
     function($firebase, $rootScope, Refs) {
@@ -569,7 +624,42 @@ angular.module('cognitio.services')
     }
   ]);
 
-},{}],17:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
+angular.module('cognitio.services')
+  .factory('Forum', ['$firebase', '$rootScope', 'Refs',
+    function($firebase, $rootScope, Refs) {
+      return {
+        all: function() {
+          return $firebase(Refs.discussion).$asArray();
+        },
+        ask: function(question) {
+          var uid = $rootScope.currentUser.uid,
+              name = $rootScope.currentUser.name;
+          question.created_at = Firebase.ServerValue.TIMESTAMP;
+          question.created_by = name;
+          question.creator_uid = uid;
+          return $firebase(Refs.discussion).$push(question);
+        },
+        upVote: function(id, value) {
+          var val = value || 0;
+          return Refs.discussion.child(id).child('likes').set(val + 1);
+        },
+        downVote: function(id, value) {
+          var val = value || 0;
+          return Refs.discussion.child(id).child('dislikes').set(val + 1);
+        },
+        comment: function(id, comment) {
+          var uid = $rootScope.currentUser.uid,
+              name = $rootScope.currentUser.name;
+          comment.created_at = Firebase.ServerValue.TIMESTAMP;
+          comment.creator_uid = uid;
+          comment.created_by = name;
+          return $firebase(Refs.discussion.child(id).child('comments')).$push(comment);
+        } 
+      };
+    }
+  ]);
+},{}],19:[function(require,module,exports){
 angular.module('cognitio.services')
   .factory('Refs', ['$cookies', '$firebase',
     function($cookies, $firebase) {
@@ -581,12 +671,13 @@ angular.module('cognitio.services')
         users: rootRef.child('users'),
         assessment: rootRef.child('assessments'),
         submissions: rootRef.child('submissions'),
-        feedbacks: rootRef.child('feedbacks')
+        feedbacks: rootRef.child('feedbacks'),
+        discussion: rootRef.child('forum')
       };
     }
   ]);
 
-},{}],18:[function(require,module,exports){
+},{}],20:[function(require,module,exports){
 angular.module('cognitio.services')
   .factory('Submission', ['$firebase', '$rootScope', 'Refs',
     function($firebase, $rootScope, Refs) {
@@ -617,7 +708,7 @@ angular.module('cognitio.services')
     }
   ]);
 
-},{}],19:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 angular.module('cognitio.services')
   .factory('Toast', [function($mdToast){
     return function(text, hideDelay, position, cb) {
@@ -633,7 +724,7 @@ angular.module('cognitio.services')
     };
   }]);
 
-},{}],20:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 angular.module('cognitio.services')
   .factory('Users', ['$firebase', 'Refs',
     function($firebase, Refs) {
