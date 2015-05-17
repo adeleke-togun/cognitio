@@ -13,6 +13,7 @@ require('./js/services/authorization.js');
 require('./js/services/assessment.js');
 require('./js/services/submission.js');
 require('./js/services/feedback.js');
+require('./js/services/forum.js');
 
 /* load filters */
 require('./js/filters/reverse.js');
@@ -27,6 +28,7 @@ require('./js/controllers/menu.js');
 require('./js/controllers/users_controllers/users_home.js');
 require('./js/controllers/users_controllers/submit.js');
 require('./js/controllers/users_controllers/users.js');
+require('./js/controllers/users_controllers/forum.js');
 require('./js/controllers/admin_controllers/admin_home.js');
 require('./js/controllers/admin_controllers/view-assessments.js');
 require('./js/controllers/admin_controllers/view-submitted-assessment.js');
@@ -73,23 +75,23 @@ Cognitio.run(['$rootScope', '$state', 'Authentication', 'Refs', 'Toast','Authori
 }]);
 
 //Toastr setup options
-      toastr.options = {
-        "closeButton": true,
-        "debug": false,
-        "newestOnTop": true,
-        "progressBar": false,
-        "positionClass": "toast-top-center",
-        "preventDuplicates": true,
-        "onclick": null,
-        "showDuration": "800",
-        "hideDuration": "1000",
-        "timeOut": "5000",
-        "extendedTimeOut": "1000",
-        "showEasing": "swing",
-        "hideEasing": "linear",
-        "showMethod": "fadeIn",
-        "hideMethod": "fadeOut"
-      }
+toastr.options = {
+  "closeButton": true,
+  "debug": false,
+  "newestOnTop": true,
+  "progressBar": false,
+  "positionClass": "toast-top-center",
+  "preventDuplicates": true,
+  "onclick": null,
+  "showDuration": "800",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}
 
 /* application routes */
 Cognitio.config(['$stateProvider','$locationProvider',
@@ -114,11 +116,6 @@ Cognitio.config(['$stateProvider','$locationProvider',
       templateUrl: 'views/users/home.html',
       controller: 'UsersHomeCtrl'
     })
-    // .state('users/id', {
-    //   url: '/users/:userId',
-    //   templateUrl: 'views/users.html',
-    //   controller: 'UsersCtrl'
-    // })
     .state('submit', {
       url: '/user/submit',
       templateUrl: 'views/users/submit.html',
@@ -128,6 +125,11 @@ Cognitio.config(['$stateProvider','$locationProvider',
       url: '/admin',
       templateUrl: 'views/admin/home.html',
       controller: 'AdminHomeCtrl'
+    })
+    .state('forum', {
+      url: '/user/forum',
+      templateUrl: 'views/users/need-help.html',
+      controller: 'ForumCtrl'
     })
     .state('view-assessments', {
       url: '/admin/view-assessments',
