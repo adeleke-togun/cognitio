@@ -11,7 +11,7 @@
                 a.submitBtn.btn.btn-default.text-center(href="/admin/create-assessment") Create Assessment
             .row
               .col-md-12
-                .row.viewWrapper.blackFont All Assignnments
+                .row.viewWrapper.blackFont All Assessments
                 .row
                   table.table.blackFont
                     thead
@@ -26,6 +26,7 @@
                         td {{detail.topic}}
                         td {{detail.created_at | date:'medium'}}
                         td {{detail.due_on | date:'medium'}} 
-                        td closed
+                        td(ng-show="{{detail.due_on}} < {{dateNow}}") Closed
+                        td(ng-show="{{detail.due_on}} > {{dateNow}}") Open
                         td 
                           a.submitBtn.btn.text-centerview(ui-sref="submitted({assessmentId:detail.$id})") View Submissions

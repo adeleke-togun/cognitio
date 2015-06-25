@@ -2,8 +2,17 @@ angular.module('cognitio.controllers')
 .controller('SubmitCtrl', ['$scope', 'Assessment', 'Submission', '$location', 'Upload', 
 	function ($scope, Assessment, Submission, $location, Upload) {
 
-  //retrieve all assessments
+  // retrieve all assessments
   $scope.assessments = Assessment.all();
+
+  // get description for selected assessment
+  $scope.getDescription = function (response) {
+    var id = response.assessment_id;
+    $scope.assessment = Assessment.find(id);
+    $scope.submitBefore = 'Submit before: ';
+    // $scope.submitClose = 'Sorry, submission for this assessment is closed!';
+    // $scope.dateNow = Date.now();
+  };
 
   //grab form data and submit assessments
   $scope.send = function (response) {

@@ -8,9 +8,14 @@
           div.form-group.form-top
             label.col-md-3.control-label(for="assessment") Assessment:
             div.col-md-6
-              select#assessment.form-control(ng-model="response.assessment_id", required)
+              select#assessment.form-control(ng-model="response.assessment_id", ng-change="getDescription(response)", required)
                 option(value="", disabled, selected) Choose an assessment
                 option(ng-repeat="assess in assessments", value="{{ assess.$id }}") {{ assess.topic }}
+              div.assessment-details
+                p.d1 {{ assessment.description }}
+                p.d2 {{ submitBefore }} <em> {{ assessment.due_on | date: 'medium' }} </em>
+                //- p.d2(ng-show="{{assessment.due_on}} > {{dateNow}}") {{ submitBefore }} <em> {{ assessment.due_on | date: 'medium' }} </em>
+                //- p.d2(ng-show="{{assessment.due_on}} < {{dateNow}}") <em> {{ submitClose }} </em>
           div.form-group.clear-form-float
             label.col-md-3.control-label(for="description") Description:
             div.col-md-6
