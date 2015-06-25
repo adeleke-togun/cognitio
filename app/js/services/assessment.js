@@ -27,14 +27,15 @@ angular.module('cognitio.services')
           var uid = $rootScope.currentUser.uid;
           var name = $rootScope.currentUser.name;
           var email = $rootScope.currentUser.email;
-
+          var due_on_formatted = new Date(rawAssessment.due_on).getTime();
+         
           var newAssessment = {};
 
           newAssessment.created_at = Firebase.ServerValue.TIMESTAMP;
           newAssessment.creator = name;
           newAssessment.creator_email = email;
           newAssessment.creator_uid = uid;
-          newAssessment.due_on = rawAssessment.due_on;
+          newAssessment.due_on = due_on_formatted;
           newAssessment.topic = rawAssessment.topic;
           newAssessment.description = rawAssessment.description;
           newAssessment.updated_at = Firebase.ServerValue.TIMESTAMP;

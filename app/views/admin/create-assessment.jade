@@ -15,9 +15,10 @@
             div.col-md-6
               textarea#description.form-control(name="description", rows="7", ng-model="response.description", placeholder="Enter a description and reequirement for this assessment... (Include link(s) to images or .psd required)", required)
           div.clear-form-float.form-group
-            label.col-md-3.control-label(for="due") Due On:
+            label.col-md-3.control-label(for="due_on") Due On:
             div.col-md-6
-              input#due.form-control(type="date", name="due", ng-model="response.due_on", required)
+              input#due.form-control(type="datetime-local", name="due_on", ng-model="response.due_on", placeholder="data format", required)
+              p(style="font-size: 0.85em; color: #c6cccc") Select date from dropdown and input time (e.g. 09:24 AM)
           div.clear-form-float.form-group
             div.col-md-offset-3.col-md-6
               input.btn-submit.btn.btn-default(type="Submit", value="SUBMIT", ng-click="send(response)", ng-disabled="createAssessment.$invalid")

@@ -7,7 +7,7 @@ font-family: 'Alegreya Sans', sans-serif; */
 
 #form-wrap {
 	font-family: 'Alegreya Sans', sans-serif;
-	margin-top: 50px;
+	margin: 50px 0;
 	padding: 10px;
 	padding-bottom: 70px;
 	background-image: url('../img/form-bg.png');
@@ -116,4 +116,27 @@ select#assessment:hover,
 .clear-form-float {
 	clear: both;
 	padding-top: 20px;
+}
+
+.assessment-details {
+	border: 1px solid #949B9B;
+  border-radius: .3125em;
+  margin: 10px 0;
+  padding: 10px;
+  line-height: 1.5;
+  text-align: justify;
+}
+
+.assessment-details .d1 {
+	font-size: .85em;
+}
+
+.assessment-details .d2 {
+	font-size: .75em;
+	color: #c6cccc;
+}
+
+.assessment-details .d2 em {
+	font-size: 1.1em;
+	color: #ddd;
 }
