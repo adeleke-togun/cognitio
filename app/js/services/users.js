@@ -1,10 +1,10 @@
 angular.module('cognitio.services')
-  .factory('Users', ['$firebase', 'Refs',
-    function($firebase, Refs) {
+  .factory('Users', ['$firebase', '$firebaseArray', '$firebaseObject', 'Refs',
+    function($firebase, $firebaseArray, $firebaseObject, Refs) {
       return {
         all: function(cb) {
           if(!cb) {
-            return $firebase(Refs.users).$asArray();
+            return $firebaseArray(Refs.users)
           }
           else {
             Refs.users.once('value', function(snap) {
@@ -15,7 +15,7 @@ angular.module('cognitio.services')
 
         find: function(uid, cb) {
           if(!cb) {
-            return $firebase(Refs.users.child(uid)).$asObject();
+            return $firebaseObject(Refs.users.child(uid))
           }
           else {
             Refs.users.child(uid).once('value', function(snap) {

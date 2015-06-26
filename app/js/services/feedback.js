@@ -1,9 +1,9 @@
 angular.module('cognitio.services')
-  .factory('Feedback', ['$firebase', '$rootScope', 'Refs',
-    function($firebase, $rootScope, Refs) {
+  .factory('Feedback', ['$firebase', '$firebaseArray', '$firebaseObject', '$rootScope', 'Refs',
+    function($firebase, $firebaseArray, $firebaseObject, $rootScope, Refs) {
       return {
         all: function() {
-          return $firebase(Refs.feedbacks).$asArray();
+          return $firebaseArray(Refs.feedbacks)
         },
 
         createFeedback: function(note, assessment_id, user_id) {
@@ -23,7 +23,7 @@ angular.module('cognitio.services')
         },
 
         getFeedback: function(feedback_id) {
-          return $firebase(Refs.feedbacks.child(feedback_id)).$asObject();
+          return $firebaseObject(Refs.feedbacks.child(feedback_id))
         },
 
         deleteFeedback: function(feedback_id) {

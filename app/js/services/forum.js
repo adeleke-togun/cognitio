@@ -1,9 +1,9 @@
 angular.module('cognitio.services')
-  .factory('Forum', ['$firebase', '$rootScope', 'Refs',
-    function($firebase, $rootScope, Refs) {
+  .factory('Forum', ['$firebase', '$firebaseArray', '$rootScope', 'Refs',
+    function($firebase, $firebaseArray, $rootScope, Refs) {
       return {
         all: function() {
-          return $firebase(Refs.discussion).$asArray();
+          return $firebaseArray(Refs.discussion)
         },
         ask: function(question) {
           var uid = $rootScope.currentUser.uid,

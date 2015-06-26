@@ -1,10 +1,9 @@
 angular.module('cognitio.services')
-  .factory('Submission', ['$firebase', '$rootScope', 'Refs',
-    function($firebase, $rootScope, Refs) {
+  .factory('Submission', ['$firebase', '$rootScope','$firebaseArray', '$firebaseObject', 'Refs',
+    function($firebase, $rootScope, $firebaseArray, $firebaseObject, Refs) {
       return {
         all: function() {
-          // console.log('Firebase--->',$firebase(Refs.submissions));
-          return $firebase(Refs.submissions).$asArray();
+          return $firebaseArray(Refs.submissions)
         },
         submit: function(assessment_id, assessment) {
           var uid = $rootScope.currentUser.uid;
@@ -22,7 +21,7 @@ angular.module('cognitio.services')
           return Refs.submissions.child(assessment_id).child(uid).set(assessmentObject);
         },
         findOne: function(id) {
-          return $firebase(Refs.submissions.child(id)).$asObject();
+          return $firebaseObject(Refs.submissions.child(id))
         } 
       };
     }
