@@ -29,10 +29,10 @@
                           |  comment
                         a.btn.btn-default.btn-sm(type="button" ng-click="like(question.$id, question.likes)")
                           i.fa.fa-thumbs-o-up.fa-lg
-                          span.offset-2{{question.likes}}
+                          span.offset-2 {{question.likes}}
                         a.btn.btn-default.btn-sm(type="button" ng-click="dislike(question.$id, question.dislikes)")
                           i.fa.fa-thumbs-o-down.fa-lg
-                          span.offset-2{{question.dislikes}}
+                          span.offset-2 {{question.dislikes}}
               article.row(ng-repeat="comment in question.comments | reverse")
                 .col-md-2.col-sm-2.col-offset-1.col-sm-offset-1.hidden-xs(ng-init="user = findUser(comment.creator_uid)")
                   figure.thumbnail

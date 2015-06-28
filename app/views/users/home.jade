@@ -1,24 +1,24 @@
-.container
-  section#home.main()
-    include ../../shared/notification
-    .container-fluid
-      .row
-      .menu.row
-        .submit.col-md-4.submitAssignment
-          .options.submit
-            .text-center.submitIcon
-              img(src="../img/feedback-100.png")
-            .text-center.submitClick
-              a.submitBtn.btn.btn-default.text-center(href='/user/submit') Submit Assignment
-        .col-md-4
-          .options
-            .text-center.submitIcon
-              img(src="../img/questions-100.png")
-            .text-center.submitClick
-              a.submitBtn.btn.btn-default.btn-lg.text-center(href='/user/forum') Need Help?
-        .view.col-md-4.viewAssignment
-          .options.view
-            .text-center.submitIcon
-              img(src="../img/report_card-100.png")
-            .text-center.submitClick
-              a.submitBtn.btn.btn-default.btn-lg.text-center(href='') View Assignments
+.home.row
+  .col-xs-12
+    .container
+      section#home.main
+        include ../../shared/notification
+        .container-fluid
+          .row
+            .col-md-4.col-sm-6.col-xs-12
+              .boxtain
+                .submit-assignment
+                  img(src='../img/feedback-100.png')
+                  a.btn.btn-default.btn-transparent(href='/user/submit') Submit Assignment
+
+            .col-md-4.col-sm-6.col-xs-12
+              .boxtain
+                .need-help
+                  img(src='../img/questions-100.png')
+                  a.btn.btn-default.btn-transparent(href='/user/forum') Need Help?
+
+            .col-md-4.col-sm-6.col-xs-12
+              .boxtain
+                .view-assignment
+                  img(src='../img/report_card-100.png')
+                  a.btn.btn-default.btn-transparent(href='') View Assignments
